@@ -189,9 +189,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="2y6-6I-Wcj" kind="modal" identifier="showImage" id="Kyf-WZ-A5Q"/>
-                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -205,10 +202,10 @@
             </objects>
             <point key="canvasLocation" x="579" y="307"/>
         </scene>
-        <!--Image View Controller-->
+        <!--SIImageViewController-->
         <scene sceneID="Q3H-EM-jH5">
             <objects>
-                <viewController id="2y6-6I-Wcj" customClass="SIImageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SIImageViewController" id="2y6-6I-Wcj" userLabel="SIImageViewController" customClass="SIImageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UXY-gY-BU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
