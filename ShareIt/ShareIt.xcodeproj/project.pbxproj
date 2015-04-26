@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F2455841AEC44960088D861 /* SIDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2455831AEC44960088D861 /* SIDashboardViewController.m */; };
 		3F2455871AEC6CAD0088D861 /* SIAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2455861AEC6CAD0088D861 /* SIAlbumsViewController.m */; };
+		3F24558A1AEC90010088D861 /* SIPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2455891AEC90010088D861 /* SIPhotosViewController.m */; };
 		3F2ECF491AEB24BD0000A231 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2ECF471AEB24BD0000A231 /* FBSDKCoreKit.framework */; };
 		3F2ECF4A1AEB24BD0000A231 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2ECF481AEB24BD0000A231 /* FBSDKLoginKit.framework */; };
 		3F2ECF4C1AEB24E00000A231 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2ECF4B1AEB24E00000A231 /* FBSDKShareKit.framework */; };
@@ -35,6 +36,8 @@
 		3F2455831AEC44960088D861 /* SIDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIDashboardViewController.m; sourceTree = "<group>"; };
 		3F2455851AEC6CAD0088D861 /* SIAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlbumsViewController.h; sourceTree = "<group>"; };
 		3F2455861AEC6CAD0088D861 /* SIAlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlbumsViewController.m; sourceTree = "<group>"; };
+		3F2455881AEC90010088D861 /* SIPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIPhotosViewController.h; sourceTree = "<group>"; };
+		3F2455891AEC90010088D861 /* SIPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIPhotosViewController.m; sourceTree = "<group>"; };
 		3F2ECF471AEB24BD0000A231 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		3F2ECF481AEB24BD0000A231 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		3F2ECF4B1AEB24E00000A231 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 			children = (
 				89344A7F1909A28B0072DAC4 /* Images.xcassets */,
 				89344A761909A28B0072DAC4 /* Main.storyboard */,
+				3F2455881AEC90010088D861 /* SIPhotosViewController.h */,
+				3F2455891AEC90010088D861 /* SIPhotosViewController.m */,
 				3F2455851AEC6CAD0088D861 /* SIAlbumsViewController.h */,
 				3F2455861AEC6CAD0088D861 /* SIAlbumsViewController.m */,
 				3F2455821AEC44960088D861 /* SIDashboardViewController.h */,
@@ -222,6 +227,7 @@
 				89344A751909A28B0072DAC4 /* SIAppDelegate.m in Sources */,
 				89344A7B1909A28B0072DAC4 /* SIMainViewController.m in Sources */,
 				8976F076190AE8B100F1A7D7 /* SIPhoto.m in Sources */,
+				3F24558A1AEC90010088D861 /* SIPhotosViewController.m in Sources */,
 				3F2455841AEC44960088D861 /* SIDashboardViewController.m in Sources */,
 				3F2455871AEC6CAD0088D861 /* SIAlbumsViewController.m in Sources */,
 				8976F096190AFF4400F1A7D7 /* SIMainView.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "SIAlbumsViewController.h"
+#import "SIPhotosViewController.h"
 
 @implementation SIAlbumsViewController
 {
@@ -43,15 +44,34 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIAlertView *messageAlert = [[UIAlertView alloc]
-                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    //UITableViewCell *cell = [tableData objectAtIndex:indexPath.row];
-    //NSString *str = cell.textLabel.text;
-    //NSLog(@"%@",str);
-    // Display Alert Message
-    [messageAlert show];
-    
-}
+        
+//        NSString *selectedRowInfo = @"You've selected a row : ";
+//        
+//        selectedRowInfo = [selectedRowInfo stringByAppendingString:[@(indexPath.row)description]];
+//        
+//        UIAlertView *messageAlert = [[UIAlertView alloc]
+//         
+//        initWithTitle:@"Row Selected" message:selectedRowInfo delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    
+//    // Display Alert Message
+//    
+//    [messageAlert show];
+//    
+//}
+//
+//    UIAlertView *messageAlert = [[UIAlertView alloc]
+//                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    UITableViewCell *cell = [tableData objectAtIndex:indexPath.row];
+//    NSString *str = cell.textLabel.text;
+//    NSLog(@"%@",str);
+//     Display Alert Message
+//    [messageAlert show];
+    SIPhotosViewController *photoController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIPhotosViewController"];
+    photoController.userID = self.userID;
+    photoController.albumID = [@(indexPath.row)description];
+    [self.navigationController pushViewController:photoController animated:YES];
+
+    }
 
 @end
 
