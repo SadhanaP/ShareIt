@@ -7,9 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-@interface SIDashboardViewController : UIViewController <UIScrollViewDelegate>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
-@property (nonatomic, strong) UILabel *labelTest;
+@interface SIDashboardViewController : UIViewController
+
+
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property(nonatomic) NSString *_temp;
+
+@property(nonatomic) FBSDKAccessToken *myAccessToken;
+
+
+@property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePicture;
 
 @end

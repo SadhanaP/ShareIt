@@ -28,8 +28,10 @@
 @property (nonatomic, strong) IBOutlet FBSDKLoginButton *loginButton;
 @property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIButton *continueButton;
 
 - (IBAction)changePage:(id)sender;
 - (IBAction)share:(id)sender;
+- (IBAction)continue:(id)sender;
 
 @end

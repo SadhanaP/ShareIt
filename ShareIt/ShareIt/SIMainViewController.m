@@ -28,6 +28,7 @@
 
 #import "SIMainView.h"
 #import "SIPhoto.h"
+#import "SIDashboardViewController.h"
 
 @interface SIMainViewController () <
   MFMailComposeViewControllerDelegate,
@@ -41,6 +42,7 @@
 {
   FBSDKLikeButton *_photoLikeButton;
   NSArray *_photos;
+  //NSString *_temp;
 }
 
 #pragma mark - Class Methods
@@ -90,8 +92,9 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
   self.loginButton.publishPermissions = @[@"publish_actions"];
-
+  self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
   _photoLikeButton = [[FBSDKLikeButton alloc] init];
   _photoLikeButton.objectType = FBSDKLikeObjectTypeOpenGraph;
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_photoLikeButton];
@@ -133,6 +136,13 @@
   [shareActionSheet addButtonWithTitle:@"Cancel"];
   shareActionSheet.cancelButtonIndex = shareActionSheet.numberOfButtons - 1;
   [shareActionSheet showInView:self.view];
+}
+
+- (IBAction)continue:(id)sender {
+    //NSLog(@"%@",_temp);
+    SIDashboardViewController *dashboardController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIDashboardViewController"];
+    dashboardController.myAccessToken = [FBSDKAccessToken currentAccessToken];
+    [self.navigationController pushViewController:dashboardController animated:YES];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
