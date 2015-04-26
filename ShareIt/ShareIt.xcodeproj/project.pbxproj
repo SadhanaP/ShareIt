@@ -16,6 +16,9 @@
 		3F2455951AECCC670088D861 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2455921AECCC670088D861 /* FBSDKShareKit.framework */; };
 		3F2455981AECCC7F0088D861 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2455961AECCC7F0088D861 /* MessageUI.framework */; };
 		3F2455991AECCC7F0088D861 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2455971AECCC7F0088D861 /* UIKit.framework */; };
+		3F24559C1AECD1800088D861 /* SIUploadPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F24559B1AECD1800088D861 /* SIUploadPhotoViewController.m */; };
+		3F2455A41AECE9720088D861 /* MBProgressHUD.h in Sources */ = {isa = PBXBuildFile; fileRef = 3F2455A21AECE9720088D861 /* MBProgressHUD.h */; };
+		3F2455A51AECE9720088D861 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2455A31AECE9720088D861 /* MBProgressHUD.m */; };
 		89344A651909A28B0072DAC4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89344A641909A28B0072DAC4 /* Foundation.framework */; };
 		89344A671909A28B0072DAC4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89344A661909A28B0072DAC4 /* CoreGraphics.framework */; };
 		89344A6F1909A28B0072DAC4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89344A6D1909A28B0072DAC4 /* InfoPlist.strings */; };
@@ -46,6 +49,10 @@
 		3F2455921AECCC670088D861 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3F2455961AECCC7F0088D861 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		3F2455971AECCC7F0088D861 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		3F24559A1AECD1800088D861 /* SIUploadPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIUploadPhotoViewController.h; sourceTree = "<group>"; };
+		3F24559B1AECD1800088D861 /* SIUploadPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIUploadPhotoViewController.m; sourceTree = "<group>"; };
+		3F2455A21AECE9720088D861 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		3F2455A31AECE9720088D861 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		89344A611909A28B0072DAC4 /* ShareIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89344A641909A28B0072DAC4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		89344A661909A28B0072DAC4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,8 +136,12 @@
 		89344A6A1909A28B0072DAC4 /* ShareIt */ = {
 			isa = PBXGroup;
 			children = (
+				3F2455A21AECE9720088D861 /* MBProgressHUD.h */,
+				3F2455A31AECE9720088D861 /* MBProgressHUD.m */,
 				89344A7F1909A28B0072DAC4 /* Images.xcassets */,
 				89344A761909A28B0072DAC4 /* Main.storyboard */,
+				3F24559A1AECD1800088D861 /* SIUploadPhotoViewController.h */,
+				3F24559B1AECD1800088D861 /* SIUploadPhotoViewController.m */,
 				3F24558B1AECA4D40088D861 /* SIImageViewController.h */,
 				3F24558C1AECA4D40088D861 /* SIImageViewController.m */,
 				3F2455881AEC90010088D861 /* SIPhotosViewController.h */,
@@ -229,6 +240,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2455A41AECE9720088D861 /* MBProgressHUD.h in Sources */,
+				3F2455A51AECE9720088D861 /* MBProgressHUD.m in Sources */,
 				89344A751909A28B0072DAC4 /* SIAppDelegate.m in Sources */,
 				89344A7B1909A28B0072DAC4 /* SIMainViewController.m in Sources */,
 				3F24558D1AECA4D40088D861 /* SIImageViewController.m in Sources */,
@@ -237,6 +250,7 @@
 				3F2455841AEC44960088D861 /* SIDashboardViewController.m in Sources */,
 				3F2455871AEC6CAD0088D861 /* SIAlbumsViewController.m in Sources */,
 				8976F096190AFF4400F1A7D7 /* SIMainView.m in Sources */,
+				3F24559C1AECD1800088D861 /* SIUploadPhotoViewController.m in Sources */,
 				89344A711909A28B0072DAC4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SIAlbumsViewController : UITableViewController <UITableViewDelegate,UITableViewDataSource>
+@interface SIAlbumsViewController : UITableViewController <UITableViewDelegate,UITableViewDataSource, UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *myTable;
 @property(nonatomic) NSData *userID;
 
+- (IBAction)addAlbum:(id)sender;
 
 @end

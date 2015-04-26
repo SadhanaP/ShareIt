@@ -8,6 +8,7 @@
 
 #import "SIPhotosViewController.h"
 #import "SIImageViewController.h"
+#import "SIUploadPhotoViewController.h"
 
 @implementation SIPhotosViewController{
     NSArray *myPhotos;
@@ -36,44 +37,11 @@
     
     return cell;
 }
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"showImage"]) {
-//        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
-//        SIImageViewController *imageViewController = segue.destinationViewController;
-//        NSIndexPath *indexPath = [indexPaths objectAtIndex:0];
-//        imageViewController.photoImageName = myPhotos[indexPath.row];
-//        [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-//    }
-//}
-
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    //        NSString *selectedRowInfo = @"You've selected a row : ";
-    //
-    //        selectedRowInfo = [selectedRowInfo stringByAppendingString:[@(indexPath.row)description]];
-    //
-    //        UIAlertView *messageAlert = [[UIAlertView alloc]
-    //
-    //        initWithTitle:@"Row Selected" message:selectedRowInfo delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    //
-    //    // Display Alert Message
-    //
-    //    [messageAlert show];
-    //
-    //}
-    //
-    //    UIAlertView *messageAlert = [[UIAlertView alloc]
-    //                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    //    UITableViewCell *cell = [tableData objectAtIndex:indexPath.row];
-    //    NSString *str = cell.textLabel.text;
-    //    NSLog(@"%@",str);
-    //     Display Alert Message
-    //    [messageAlert show];
+
     SIImageViewController *imageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIImageViewController"];
-//  //
     imageViewController.userID = self.userID;
     imageViewController.albumID = self.albumID;
     imageViewController.photoID = [@(indexPath.row)description];
@@ -82,6 +50,12 @@
     
 }
 
-
+- (IBAction)addMoreButton:(id)sender {
+    
+    SIUploadPhotoViewController *uploadController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIUploadPhotoViewController"];
+    uploadController.userID = self.userID;
+    uploadController.albumID = self.albumID;
+    [self.navigationController pushViewController:uploadController animated:YES];
+}
 
 @end

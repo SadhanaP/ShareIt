@@ -17,8 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *displayImage;
 @property (weak, nonatomic) NSString *photoImageName;
 @property(nonatomic) NSData *userID;
-@property(nonatomic) NSString *photoID;
 @property(nonatomic) NSString *albumID;
+@property(nonatomic) NSString *photoID;
 - (IBAction)sharePic:(id)sender;
 
 @end

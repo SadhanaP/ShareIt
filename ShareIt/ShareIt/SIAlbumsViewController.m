@@ -9,6 +9,8 @@
 #import "SIAlbumsViewController.h"
 #import "SIPhotosViewController.h"
 
+#import "SIUploadPhotoViewController.h"
+
 @implementation SIAlbumsViewController
 {
     NSArray *tableData;
@@ -20,7 +22,7 @@
     
     NSLog(@"%@",_userID);
     // Initialize table data
-    tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    tableData = [NSArray arrayWithObjects:@"Default", @"Profile Pics", @"Uploads", nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -72,6 +74,26 @@
     [self.navigationController pushViewController:photoController animated:YES];
 
     }
+
+- (IBAction)addAlbum:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Album Name"
+                                                    message:@"  "
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"OK", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        NSLog(@"%@",name);
+        // Insert whatever needs to be done with "name"
+        //use rest api to create a new album on server
+        //refresh this view
+    }
+}
 
 @end
 
