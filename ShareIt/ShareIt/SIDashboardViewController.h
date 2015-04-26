@@ -18,8 +18,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property(nonatomic) NSString *_temp;
 
+@property(nonatomic) NSData *uid;
+
 @property(nonatomic) FBSDKAccessToken *myAccessToken;
 
+- (IBAction)displayAlbums:(id)sender;
 
 @property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePicture;
 

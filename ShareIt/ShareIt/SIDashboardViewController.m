@@ -7,6 +7,7 @@
 //
 
 #import "SIDashboardViewController.h"
+#import "SIAlbumsViewController.h"
 #import "SIMainViewController.h"
 
 @implementation SIDashboardViewController
@@ -40,6 +41,8 @@
              [profilePictureview setProfileID:result[@"id"]];
              [self.view addSubview:profilePictureview];
              
+             NSLog(@"%@",result[@"id"]);
+             _uid=result[@"id"];
              NSLog(@"%@",result[@"name"]);
              self.nameLabel.text=result[@"name"];
          }
@@ -52,4 +55,9 @@
 
 
 
+- (IBAction)displayAlbums:(id)sender {
+    SIAlbumsViewController *albumsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIAlbumsViewController"];
+    albumsController.userID = _uid;
+    [self.navigationController pushViewController:albumsController animated:YES];
+}
 @end

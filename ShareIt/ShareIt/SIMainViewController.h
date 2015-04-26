@@ -22,16 +22,19 @@
 
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface SIMainViewController : UIViewController <UIScrollViewDelegate>
+@interface SIMainViewController : UIViewController <UIScrollViewDelegate,FBSDKLoginButtonDelegate>
 
-@property (nonatomic, strong) IBOutlet FBSDKLikeControl *pageLikeControl;
 @property (nonatomic, strong) IBOutlet FBSDKLoginButton *loginButton;
 @property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UIButton *continueButton;
-
+@property (nonatomic, strong) IBOutlet UIButton *myDashboard;
 - (IBAction)changePage:(id)sender;
 - (IBAction)share:(id)sender;
 - (IBAction)continue:(id)sender;
+- (IBAction)myDashboard:(id)sender;
+
+
+
 
 @end

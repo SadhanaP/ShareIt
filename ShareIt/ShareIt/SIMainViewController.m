@@ -40,7 +40,6 @@
 
 @implementation SIMainViewController
 {
-  FBSDKLikeButton *_photoLikeButton;
   NSArray *_photos;
   //NSString *_temp;
 }
@@ -95,15 +94,41 @@
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
   self.loginButton.publishPermissions = @[@"publish_actions"];
   self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
-  _photoLikeButton = [[FBSDKLikeButton alloc] init];
-  _photoLikeButton.objectType = FBSDKLikeObjectTypeOpenGraph;
-  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_photoLikeButton];
-
-  self.pageLikeControl.likeControlAuxiliaryPosition = FBSDKLikeControlAuxiliaryPositionBottom;
-  self.pageLikeControl.likeControlHorizontalAlignment = FBSDKLikeControlHorizontalAlignmentCenter;
-  self.pageLikeControl.objectID = @"shareitexampleapp";
-
+    self.myDashboard.hidden=YES;
+ [_loginButton setDelegate:self];
   [self _configurePhotos];
+}
+
+
+- (void) loginButton: (FBSDKLoginButton *)loginButton
+didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
+               error: 	(NSError *)error{
+    // self.profilePicture.hidden=YES;
+     self.continueButton.hidden=YES;
+     self.myDashboard.hidden=NO;
+    NSLog(@"U are suceesfully logged in hereeeee");
+    //[self returnUserProfileData];
+   // _inviteFriends.enabled=YES;
+    //[self inviteFriends:tableData];
+    //[self returnUserFriendsData];
+    
+}
+
+//-(IBAction)disableButton{
+//      inviteFriends.enabled=NO;
+//}
+
+-(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+    
+    self.continueButton.hidden=NO;
+    self.myDashboard.hidden=YES;
+
+    NSLog(@"U are suceesfully logged out");
+ //   self.emailLabel.text =@"";
+   // self.nameLabel.text=@"";
+    // self.profilePicture.hidden=YES;
+    
+    
 }
 
 #pragma mark - Sharing
@@ -269,14 +294,13 @@
 {
   SIPhoto *photo = [self _currentPhoto];
   [self _mainView].photo = photo;
-  _photoLikeButton.objectID = photo.objectURL.absoluteString;
 }
 
 #pragma mark - FBSDKSharingDelegate
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
 {
-  NSLog(@"completed share:%@", results);
+ // [self.continueButton setTitle:@"My Dashboard" forState:UIControlStateNormal];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
@@ -292,5 +316,13 @@
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer
 {
   NSLog(@"share cancelled");
+}
+- (IBAction)myDashboard:(id)sender {
+    
+    //NSLog(@"%@",_temp);
+    SIDashboardViewController *dashboardController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIDashboardViewController"];
+    dashboardController.myAccessToken = [FBSDKAccessToken currentAccessToken];
+    [self.navigationController pushViewController:dashboardController animated:YES];
+
 }
 @end
