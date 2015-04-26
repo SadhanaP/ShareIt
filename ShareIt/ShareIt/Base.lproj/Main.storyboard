@@ -211,9 +211,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="F8I-YF-MLk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="491"/>
+                                <rect key="frame" x="0.0" y="77" width="320" height="399"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KAZ-xA-xZr">
+                                <rect key="frame" x="259" y="27" width="61" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="Button" image="ShareIcon"/>
+                                <connections>
+                                    <action selector="sharePic:" destination="2y6-6I-Wcj" eventType="touchUpInside" id="llc-W1-iRG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -248,6 +259,9 @@
             <point key="canvasLocation" x="1050" y="-365"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ShareIcon" width="128" height="128"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIImageViewController : UIViewController 
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <MessageUI/MessageUI.h>
+
+
+@interface SIImageViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *displayImage;
 @property (weak, nonatomic) NSString *photoImageName;
 @property(nonatomic) NSData *userID;
 @property(nonatomic) NSString *photoID;
 @property(nonatomic) NSString *albumID;
+- (IBAction)sharePic:(id)sender;
 
 @end
