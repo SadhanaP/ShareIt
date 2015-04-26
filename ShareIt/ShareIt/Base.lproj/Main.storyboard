@@ -89,13 +89,7 @@
                         </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Share It!" id="M4E-sx-4EE">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="WiB-pe-Ba1">
-                            <connections>
-                                <action selector="share:" destination="rQl-PL-IFJ" id="75p-MJ-fxL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Share It!" id="M4E-sx-4EE"/>
                     <connections>
                         <outlet property="continueButton" destination="Yz1-We-gzX" id="zuG-fI-r45"/>
                         <outlet property="loginButton" destination="X3X-16-Bag" id="9yx-kb-Z7x"/>

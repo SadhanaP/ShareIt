@@ -1,26 +1,15 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
+//  SIUploadPhotoViewController.h
+//  ShareIt
 //
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
+//  Created by student on 4/26/15.
+//  Copyright (c) 2015 Example. All rights reserved.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
 
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface SIMainViewController : UIViewController <UIScrollViewDelegate,FBSDKLoginButtonDelegate>
 
@@ -30,7 +19,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *continueButton;
 @property (nonatomic, strong) IBOutlet UIButton *myDashboard;
 - (IBAction)changePage:(id)sender;
-- (IBAction)share:(id)sender;
 - (IBAction)continue:(id)sender;
 - (IBAction)myDashboard:(id)sender;
 

@@ -1,20 +1,10 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 //
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
+//  SIUploadPhotoViewController.h
+//  ShareIt
 //
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
+//  Created by student on 4/26/15.
+//  Copyright (c) 2015 Example. All rights reserved.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "SIMainViewController.h"
 
@@ -24,24 +14,18 @@
 
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#import <FBSDKShareKit/FBSDKShareKit.h>
-
 #import "SIMainView.h"
 #import "SIPhoto.h"
 #import "SIDashboardViewController.h"
 
-@interface SIMainViewController () <
-  MFMailComposeViewControllerDelegate,
-  MFMessageComposeViewControllerDelegate,
-  UIActionSheetDelegate,
-  FBSDKSharingDelegate>
+@interface SIMainViewController ()
+
 @property (nonatomic, strong) UIActionSheet *shareActionSheet;
 @end
 
 @implementation SIMainViewController
 {
   NSArray *_photos;
-  //NSString *_temp;
 }
 
 #pragma mark - Class Methods
@@ -64,23 +48,6 @@
            ];
 }
 
-#pragma mark - Object Lifecycle
-
-- (void)dealloc
-{
-  _shareActionSheet.delegate = nil;
-}
-
-#pragma mark - Properties
-
-- (void)setShareActionSheet:(UIActionSheet *)shareActionSheet
-{
-  if (![_shareActionSheet isEqual:shareActionSheet]) {
-    _shareActionSheet.delegate = nil;
-    _shareActionSheet = shareActionSheet;
-  }
-}
-
 #pragma mark - View Management
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -92,9 +59,15 @@
 {
   [super viewDidLoad];
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    
+    self.myDashboard.hidden=YES;
+    if([FBSDKAccessToken currentAccessToken]){
+        self.myDashboard.hidden=NO;
+        self.continueButton.hidden=NO;        
+    }
+    
   self.loginButton.publishPermissions = @[@"publish_actions"];
   self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
-    self.myDashboard.hidden=YES;
  [_loginButton setDelegate:self];
   [self _configurePhotos];
 }
@@ -103,20 +76,10 @@
 - (void) loginButton: (FBSDKLoginButton *)loginButton
 didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
                error: 	(NSError *)error{
-    // self.profilePicture.hidden=YES;
      self.continueButton.hidden=YES;
      self.myDashboard.hidden=NO;
     NSLog(@"U are suceesfully logged in hereeeee");
-    //[self returnUserProfileData];
-   // _inviteFriends.enabled=YES;
-    //[self inviteFriends:tableData];
-    //[self returnUserFriendsData];
-    
 }
-
-//-(IBAction)disableButton{
-//      inviteFriends.enabled=NO;
-//}
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
     
@@ -124,132 +87,10 @@ didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
     self.myDashboard.hidden=YES;
 
     NSLog(@"U are suceesfully logged out");
- //   self.emailLabel.text =@"";
-   // self.nameLabel.text=@"";
-    // self.profilePicture.hidden=YES;
-    
     
 }
 
-#pragma mark - Sharing
 
-- (void)share:(id)sender
-{
-  UIActionSheet *shareActionSheet = self.shareActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                                                        delegate:self
-                                                                               cancelButtonTitle:nil
-                                                                          destructiveButtonTitle:nil
-                                                                               otherButtonTitles:nil];
-
-  if ([MFMailComposeViewController canSendMail]) {
-    [shareActionSheet addButtonWithTitle:@"Mail"];
-  }
-
-  if ([MFMessageComposeViewController canSendAttachments]) {
-    [shareActionSheet addButtonWithTitle:@"Message"];
-  }
-
-  FBSDKShareDialog *facebookShareDialog = [self getShareDialogWithContentURL:[self _currentPhoto].objectURL];
-  if ([facebookShareDialog canShow]) {
-    [shareActionSheet addButtonWithTitle:@"Share on Facebook"];
-  }
-  FBSDKMessageDialog *messengerShareDialog = [self getMessageDialogWithContentURL:[self _currentPhoto].objectURL];
-  if ( [messengerShareDialog canShow]) {
-    [shareActionSheet addButtonWithTitle:@"Send with Messenger"];
-  }
-
-  [shareActionSheet addButtonWithTitle:@"Cancel"];
-  shareActionSheet.cancelButtonIndex = shareActionSheet.numberOfButtons - 1;
-  [shareActionSheet showInView:self.view];
-}
-
-- (IBAction)continue:(id)sender {
-    //NSLog(@"%@",_temp);
-    SIDashboardViewController *dashboardController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIDashboardViewController"];
-    dashboardController.myAccessToken = [FBSDKAccessToken currentAccessToken];
-    [self.navigationController pushViewController:dashboardController animated:YES];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  if (_shareActionSheet != actionSheet) {
-    return;
-  }
-
-  SIPhoto *photo = [self _currentPhoto];
-
-  NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-  if ([buttonTitle isEqualToString:@"Mail"]) {
-    [self _sendMailWithPhoto:photo];
-  } else if ([buttonTitle isEqualToString:@"Message"]) {
-    [self _sendMessageWithPhoto:photo];
-  } else if ([buttonTitle isEqualToString:@"Share on Facebook"]) {
-    FBSDKShareDialog *shareDialog = [self getShareDialogWithContentURL:photo.objectURL];
-    shareDialog.delegate = self;
-    [shareDialog show];
-  } else if ([buttonTitle isEqualToString:@"Send with Messenger"]) {
-    FBSDKMessageDialog *shareDialog = [self getMessageDialogWithContentURL:photo.objectURL];
-    shareDialog.delegate = self;
-    [shareDialog show];
-  }
-
-  _shareActionSheet = nil;
-}
-
-- (void)_sendMailWithPhoto:(SIPhoto *)photo
-{
-  MFMailComposeViewController *viewController = [[MFMailComposeViewController alloc] init];
-  viewController.mailComposeDelegate = self;
-  [viewController setSubject:@"Share It: Photo"];
-  [viewController setMessageBody:photo.title isHTML:NO];
-  NSData *data = UIImageJPEGRepresentation(photo.image, 1.0);
-  [viewController addAttachmentData:data mimeType:@"image/jpeg" fileName:@"image.jpg"];
-  [self presentViewController:viewController animated:YES completion:NULL];
-}
-
-- (void)_sendMessageWithPhoto:(SIPhoto *)photo
-{
-  MFMessageComposeViewController *viewController = [[MFMessageComposeViewController alloc] init];
-  viewController.messageComposeDelegate = self;
-  NSData *data = UIImageJPEGRepresentation(photo.image, 1.0);
-  viewController.body = photo.title;
-  [viewController addAttachmentData:data typeIdentifier:@"public.jpeg" filename:@"image.jpg"];
-  [self presentViewController:viewController animated:YES completion:NULL];
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error
-{
-  [controller dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller
-                 didFinishWithResult:(MessageComposeResult)result
-{
-  [controller dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (FBSDKShareLinkContent *)getShareLinkContentWithContentURL:(NSURL *)objectURL
-{
-  FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-  content.contentURL = objectURL;
-  return content;
-}
-
-- (FBSDKShareDialog *)getShareDialogWithContentURL:(NSURL *)objectURL
-{
-  FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
-  shareDialog.shareContent = [self getShareLinkContentWithContentURL:objectURL];
-  return shareDialog;
-}
-
-- (FBSDKMessageDialog *)getMessageDialogWithContentURL:(NSURL *)objectURL
-{
-  FBSDKMessageDialog *shareDialog = [[FBSDKMessageDialog alloc] init];
-  shareDialog.shareContent = [self getShareLinkContentWithContentURL:objectURL];
-  return shareDialog;
-}
 
 #pragma mark - Paging
 
@@ -290,39 +131,21 @@ didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
   return ([view isKindOfClass:[SIMainView class]] ? (SIMainView *)view : nil);
 }
 
-- (void)_updateViewForCurrentPage
-{
+- (void)_updateViewForCurrentPage{
   SIPhoto *photo = [self _currentPhoto];
   [self _mainView].photo = photo;
 }
 
-#pragma mark - FBSDKSharingDelegate
-
-- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
-{
- // [self.continueButton setTitle:@"My Dashboard" forState:UIControlStateNormal];
-}
-
-- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
-{
-  NSLog(@"sharing error:%@", error);
-  NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
-  @"There was a problem sharing, please try again later.";
-  NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
-
-  [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-}
-
-- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
-{
-  NSLog(@"share cancelled");
-}
-- (IBAction)myDashboard:(id)sender {
-    
-    //NSLog(@"%@",_temp);
+- (IBAction)continue:(id)sender {
     SIDashboardViewController *dashboardController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIDashboardViewController"];
     dashboardController.myAccessToken = [FBSDKAccessToken currentAccessToken];
     [self.navigationController pushViewController:dashboardController animated:YES];
-
 }
+
+- (IBAction)myDashboard:(id)sender {
+    SIDashboardViewController *dashboardController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIDashboardViewController"];
+    dashboardController.myAccessToken = [FBSDKAccessToken currentAccessToken];
+    [self.navigationController pushViewController:dashboardController animated:YES];
+}
+
 @end
