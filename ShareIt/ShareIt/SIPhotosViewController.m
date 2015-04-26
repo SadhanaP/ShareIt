@@ -7,6 +7,7 @@
 //
 
 #import "SIPhotosViewController.h"
+#import "SIImageViewController.h"
 
 @implementation SIPhotosViewController{
     NSArray *myPhotos;
@@ -36,6 +37,15 @@
     return cell;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showImage"]) {
+        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+        SIImageViewController *imageViewController = segue.destinationViewController;
+        NSIndexPath *indexPath = [indexPaths objectAtIndex:0];
+        imageViewController.photoImageName = myPhotos[indexPath.row];
+        [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    }
+}
 
 
 @end
