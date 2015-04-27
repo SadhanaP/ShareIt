@@ -19,5 +19,6 @@
 @property(nonatomic) NSString *albumID;
 @property(nonatomic) NSString *photoID;
 - (IBAction)sharePic:(id)sender;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

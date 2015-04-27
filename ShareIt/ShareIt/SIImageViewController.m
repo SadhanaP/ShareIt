@@ -9,7 +9,21 @@
 #import "SIImageViewController.h"
 
 @implementation SIImageViewController
--(void) viewDidLoad{
+- (void) tapped
+
+{
+    [self.view endEditing:YES];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // scroll view
+    self.scrollView.contentSize = CGSizeMake(320, 700);
+    
+    UITapGestureRecognizer *tapScroll = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped)];
+    tapScroll.cancelsTouchesInView = NO;
+    [_scrollView addGestureRecognizer:tapScroll];
 //    _displayImage.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
     [super viewDidLoad];
     self.displayImage.image = [UIImage imageNamed:self.photoImageName];

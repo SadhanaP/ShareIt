@@ -15,5 +15,6 @@
 
 - (IBAction)choosePhoto:(id)sender;
 - (IBAction)uploadToServer:(id)sender;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

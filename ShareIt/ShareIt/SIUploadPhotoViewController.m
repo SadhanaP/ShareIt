@@ -10,6 +10,22 @@
 #import "MBProgressHUD.h"
 
 @implementation SIUploadPhotoViewController
+- (void) tapped
+
+{
+    [self.view endEditing:YES];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // scroll view
+    self.scrollView.contentSize = CGSizeMake(320, 700);
+    
+    UITapGestureRecognizer *tapScroll = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped)];
+    tapScroll.cancelsTouchesInView = NO;
+    [_scrollView addGestureRecognizer:tapScroll];
+}
 
 - (IBAction)choosePhoto:(id)sender {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];

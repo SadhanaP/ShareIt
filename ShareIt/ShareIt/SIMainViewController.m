@@ -18,6 +18,7 @@
 #import "SIPhoto.h"
 #import "SIDashboardViewController.h"
 
+
 @interface SIMainViewController ()
 
 @property (nonatomic, strong) UIActionSheet *shareActionSheet;
@@ -79,6 +80,7 @@ didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
      self.continueButton.hidden=YES;
      self.myDashboard.hidden=NO;
     NSLog(@"U are suceesfully logged in hereeeee");
+    
 }
 
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{

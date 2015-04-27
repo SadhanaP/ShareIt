@@ -24,5 +24,6 @@
 - (IBAction)displayAlbums:(id)sender;
 
 @property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePicture;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

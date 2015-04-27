@@ -21,7 +21,6 @@
     _myTable.dataSource=self;
     
     NSLog(@"%@",_userID);
-    // Initialize table data
     tableData = [NSArray arrayWithObjects:@"Default", @"Profile Pics", @"Uploads", nil];
 }
 
@@ -89,11 +88,15 @@
     if (buttonIndex == 1) {
         NSString *name = [alertView textFieldAtIndex:0].text;
         NSLog(@"%@",name);
-        // Insert whatever needs to be done with "name"
-        //use rest api to create a new album on server
-        //refresh this view
+        [self didFinishLoadingwithData:[NSArray arrayWithObjects:@"Default", @"Profile Pics", @"Uploads", @"New", nil]];
     }
 }
+
+-(void) didFinishLoadingwithData:(NSArray*) data {
+    tableData = data;
+    [self.tableView reloadData];
+}
+
 
 @end
 
