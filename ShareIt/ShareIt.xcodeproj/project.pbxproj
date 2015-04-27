@@ -247,6 +247,8 @@
 		89344A6A1909A28B0072DAC4 /* ShareIt */ = {
 			isa = PBXGroup;
 			children = (
+				3F8220221AEDE33B0072F74A /* AFNetworking */,
+				3F8220361AEDE33B0072F74A /* UIKit+AFNetworking */,
 				3F2455A21AECE9720088D861 /* MBProgressHUD.h */,
 				3F2455A31AECE9720088D861 /* MBProgressHUD.m */,
 				89344A7F1909A28B0072DAC4 /* Images.xcassets */,
@@ -256,8 +258,6 @@
 				3F24558B1AECA4D40088D861 /* SIImageViewController.h */,
 				3F24558C1AECA4D40088D861 /* SIImageViewController.m */,
 				3F2455881AEC90010088D861 /* SIPhotosViewController.h */,
-				3F8220221AEDE33B0072F74A /* AFNetworking */,
-				3F8220361AEDE33B0072F74A /* UIKit+AFNetworking */,
 				3F2455891AEC90010088D861 /* SIPhotosViewController.m */,
 				3F2455851AEC6CAD0088D861 /* SIAlbumsViewController.h */,
 				3F2455861AEC6CAD0088D861 /* SIAlbumsViewController.m */,

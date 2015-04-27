@@ -9,13 +9,39 @@
 #import "SIPhotosViewController.h"
 #import "SIImageViewController.h"
 #import "SIUploadPhotoViewController.h"
+#import "AFNetworking.h"
 
-@implementation SIPhotosViewController{
+
+static NSString * const getPhotoURL=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/549/photo/593";
+
+@implementation SIPhotosViewController
     NSArray *myPhotos;
-}
+    NSString *tempUrl;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"Album ID: %@", self.albumID);
+    
+    
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:getPhotoURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"JSON: %@", [responseObject objectForKey:@"photoUrl"]);
+        tempUrl=[responseObject objectForKey:@"photoUrl"];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
+    
+    
+   // UIImage *fetchedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:tempUrl]]];
+    
+    
+    
     
     // Initialize recipe image array
     myPhotos = [NSArray arrayWithObjects:@"Goofy.png", @"Liking.png", @"Viking.png", nil];
