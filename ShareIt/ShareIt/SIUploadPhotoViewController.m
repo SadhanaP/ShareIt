@@ -39,6 +39,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //NSLog(@"%@",info[UIImagePickerControllerMediaURL]);
     self.imageUploadView.image = chosenImage;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
