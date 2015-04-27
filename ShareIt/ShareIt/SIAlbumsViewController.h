@@ -12,6 +12,8 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *myTable;
 @property(nonatomic) NSData *userID;
+//@property (strong, nonatomic) NSDictionary *dataDict;
+//@property (strong, nonatomic) NSMutableArray *dataArary;
 
 - (IBAction)addAlbum:(id)sender;
 

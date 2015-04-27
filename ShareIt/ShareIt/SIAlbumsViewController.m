@@ -8,19 +8,60 @@
 
 #import "SIAlbumsViewController.h"
 #import "SIPhotosViewController.h"
-
+#import "AFNetworking.h"
 #import "SIUploadPhotoViewController.h"
+
+
 
 @implementation SIAlbumsViewController
 {
     NSArray *tableData;
 }
+static NSString * const getAlbumsURL=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album";
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _myTable.dataSource=self;
     
-    NSLog(@"%@",_userID);
+    //NSLog(@"%@",_userID);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:getAlbumsURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            
+            NSString *zees=[responseObject objectForKey:@"feed"][@"author"][0][@"name"][@"$t"];
+            NSLog(@"%@",zees);
+            
+            
+       // NSLog(@"JSON: %@", responseObject);
+        //    self.dataDict = (NSDictionary *) responseObject;
+//            self.dataArary = self.dataDict[@"feed"][@"author"][0][@"name"];
+//            NSString *zee=[self.dataArary valueForKey:@"$t"];
+//            NSLog(@"**************%@******%lu",self.dataArary,(unsigned long)self.dataArary.count);
+            
+            
+            
+            //NSError *error;
+        
+   // NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
+        
+        //NSLog(@"%@",jsonData);
+        //NSLog(@"JSON: %@", responseObject.description);
+//        NSString *idValue  = responseObject[@"_id"];
+//        NSLog(@"%@",idValue);
+//        NSArray *array = responseObject[@"JSON"];
+//        NSArray *array2  = [array valueForKey: @"album"];
+        //tableData = [array2 valueForKey: @"albumName"];
+            
+            
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
+    
+    
     tableData = [NSArray arrayWithObjects:@"Default", @"Profile Pics", @"Uploads", nil];
 }
 
