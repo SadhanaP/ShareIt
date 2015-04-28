@@ -8,8 +8,12 @@
 
 #import "SIUploadPhotoViewController.h"
 #import "MBProgressHUD.h"
+#import "AFNetworking.h"
 
 @implementation SIUploadPhotoViewController
+
+static NSString * const uploadAlbumUrl=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/0";
+
 - (void) tapped
 
 {
@@ -41,7 +45,6 @@
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     //NSLog(@"%@",info[UIImagePickerControllerMediaURL]);
     self.imageUploadView.image = chosenImage;
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
@@ -58,9 +61,26 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Uploading";
     [hud show:YES];
+
+    NSString *userId= @"id"; // replace with user id
+    NSString *albumId= @"albumId"; // replace with
+    
+    NSDictionary *params = @{@"userId":userId, @"albumId":albumId};
+    
+    AFHTTPRequestOperationManager *sharedManager = [AFHTTPRequestOperationManager manager];;
+    [sharedManager POST:uploadAlbumUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        if(_imageUploadView.image){
+            [formData appendPartWithFileData:UIImageJPEGRepresentation(_imageUploadView.image, 0.5) name:@"thumbnail" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+        }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [hud show:NO];
+        NSLog(@"Success");
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Fail");
+    }];
+
     //api call for upload
     //[hud show:NO];
-
-    
 }
 @end
