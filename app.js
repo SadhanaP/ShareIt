@@ -7,11 +7,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
 var app = express();
 
-mongoose.connect('mongodb://cmpe277:cmpe277@ds047107.mongolab.com:47107/cmpe277');
-
+//mongoose.connect('mongodb://cmpe277:cmpe277@ds047107.mongolab.com:47107/cmpe277');
+mongoose.connect('mongodb://cmpe277:cmpe277@ds041168.mongolab.com:41168/cmpe277');
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
