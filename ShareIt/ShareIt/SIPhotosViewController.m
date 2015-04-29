@@ -18,7 +18,6 @@ static NSString * getPhotoURL;
 
 @implementation SIPhotosViewController
 
-NSMutableArray *myPhotos;
 NSString *tempUrl;
 NSInteger i;
 
@@ -37,15 +36,7 @@ NSInteger i;
     getPhotoURL = [getPhotoURL stringByAppendingString:@"/photos/"];
 
     NSLog(@"getPhotoURL: %@", getPhotoURL);
-    //[self fetchAlbumPhotos];
-    
-    
-    
-           // Initialize recipe image array
-    myPhotos = [NSMutableArray arrayWithObjects: @"Goofy.png", @"Liking.png", @"Viking.png", nil];
-    
-    
-    //myPhotos = [[NSMutableArray alloc] init];
+ 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:getPhotoURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"response object count: %@",responseObject);
@@ -54,24 +45,24 @@ NSInteger i;
             
             NSMutableArray *mutableImages = [NSMutableArray arrayWithCapacity:[responseObject count]];
     
-       // NSLog(@"response object count1: %lu",[[responseObject objectAtIndex:0] count]);
-        NSLog(@"response object count2: %lu",[responseObject count]);
+        NSLog(@"response object count: %lu",[responseObject count]);
         
         //NSLog(@"response object count2: %@",[responseObject objectAtIndex:0]);
         NSDictionary *dataDict = (NSDictionary *) [responseObject objectAtIndex:0];
-        NSLog(@"response object count2: %@",dataDict);
+        NSLog(@"dataDict: %@",dataDict);
         NSLog(@"URL: %@",dataDict[@"photoUrl"]);
     
     
         for (i=0; i<[responseObject count]; i++) {
             NSDictionary *obj = (NSDictionary *) [responseObject objectAtIndex:i];
             NSString *ImgUrl = obj[@"photoUrl"];
-            NSLog(@"url : %@",ImgUrl);
+            NSLog(@"url %lu : %@",i,ImgUrl);
     
-            
-             [mutableImages addObject:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://photoshareappcmpe277.s3-us-west-1.amazonaws.com/pic-st-loup-herault-le-languedoc1430071277595.gif?AWSAccessKeyId=AKIAJRSSTBSKXU62UWUA&Expires=1461607278&Signature=1dMau3wbine58Y9wiai5J5n0DNU%3D"]] ]];
-            
-            
+            UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]] ];
+            if(image){
+             [mutableImages addObject:image];
+            }
+            //@"https://photoshareappcmpe277.s3-us-west-1.amazonaws.com/pic-st-loup-herault-le-languedoc1430071277595.gif?AWSAccessKeyId=AKIAJRSSTBSKXU62UWUA&Expires=1461607278&Signature=1dMau3wbine58Y9wiai5J5n0DNU%3D"
             
 //            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
            // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]]];
@@ -142,7 +133,7 @@ NSInteger i;
     imageViewController.albumID = self.albumID;
     //imageViewController.photoID = [@(indexPath.row)description];
     imageViewController.photoID = [@(indexPath.row)description];
-    imageViewController.photoImageName = myPhotos[indexPath.row];
+   // imageViewController.photoImageName = myPhotos[indexPath.row];
     [self.navigationController pushViewController:imageViewController animated:YES];
     
 }
