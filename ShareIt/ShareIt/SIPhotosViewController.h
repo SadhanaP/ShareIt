@@ -11,6 +11,8 @@
 @interface SIPhotosViewController : UICollectionViewController 
 @property(nonatomic) NSString *userID;
 @property(nonatomic) NSString *albumID;
+@property (nonatomic, strong) NSArray *images;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 
 - (IBAction)addMoreButton:(id)sender;
 

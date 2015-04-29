@@ -17,6 +17,7 @@ static NSString * getPhotoURL;
 //=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/549/photo/593";
 
 @implementation SIPhotosViewController
+
 NSMutableArray *myPhotos;
 NSString *tempUrl;
 NSInteger i;
@@ -48,12 +49,15 @@ NSInteger i;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:getPhotoURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"response object count: %@",responseObject);
-
+       
+        if ([responseObject count]) {
+            
+            NSMutableArray *mutableImages = [NSMutableArray arrayWithCapacity:[responseObject count]];
     
        // NSLog(@"response object count1: %lu",[[responseObject objectAtIndex:0] count]);
         NSLog(@"response object count2: %lu",[responseObject count]);
         
-        NSLog(@"response object count2: %@",[responseObject objectAtIndex:0]);
+        //NSLog(@"response object count2: %@",[responseObject objectAtIndex:0]);
         NSDictionary *dataDict = (NSDictionary *) [responseObject objectAtIndex:0];
         NSLog(@"response object count2: %@",dataDict);
         NSLog(@"URL: %@",dataDict[@"photoUrl"]);
@@ -65,19 +69,27 @@ NSInteger i;
             NSLog(@"url : %@",ImgUrl);
     
             
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
+             [mutableImages addObject:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://photoshareappcmpe277.s3-us-west-1.amazonaws.com/pic-st-loup-herault-le-languedoc1430071277595.gif?AWSAccessKeyId=AKIAJRSSTBSKXU62UWUA&Expires=1461607278&Signature=1dMau3wbine58Y9wiai5J5n0DNU%3D"]] ]];
+            
+            
+            
+//            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
            // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]]];
     
-     NSLog(@"image : %@",image);
-            
-            
-        [myPhotos addObject:image];
+     //NSLog(@"image : %@",image);
             
             
         }
+            
+            _images = [NSArray arrayWithArray:mutableImages];
+            
+            //self.zImages=[NSArray arrayWithArray:myPhotos];
+            [self.collectionView reloadData];
+            
+        }
         
-        NSLog(@"myPhotos1 count: %lu",[myPhotos count]);
-        NSLog(@"myPhotos1 : %@",myPhotos);
+//        NSLog(@"myPhotos1 count: %lu",[myPhotos count]);
+//        NSLog(@"myPhotos1 : %@",myPhotos);
    
             
         
@@ -92,26 +104,34 @@ NSInteger i;
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSLog(@"In numberOfItemsInSection");
 
-    return myPhotos.count;
+    return _images.count;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"Cell";
-    NSLog(@"In numberOfItemsInSection");
-    NSLog(@"tableData : %@",myPhotos);
+//    static NSString *identifier = @"Cell";
+//    NSLog(@"In numberOfItemsInSection");
+//    NSLog(@"tableData : %@",_images);
+//    
+//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+//    
+//    UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+////    NSString *imageName=[myPhotos objectAtIndex:indexPath.row];
+////    photoImageView.image = [UIImage imageNamed:imageName];
+//    NSLog(@"%@",[UIImage imageWithData:[NSData
+//                                  dataWithContentsOfURL:[NSURL URLWithString:[_images objectAtIndex:indexPath.row]]]]);
+//    photoImageView.image = [UIImage imageWithData:[NSData
+//                                                   dataWithContentsOfURL:[NSURL URLWithString:[_images objectAtIndex:indexPath.row]]]];
+//    
+//    
+//    return cell;
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
-    UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
-//    NSString *imageName=[myPhotos objectAtIndex:indexPath.row];
-//    photoImageView.image = [UIImage imageNamed:imageName];
-    NSLog(@"%@",[UIImage imageWithData:[NSData
-                                  dataWithContentsOfURL:[NSURL URLWithString:[myPhotos objectAtIndex:indexPath.row]]]]);
-    photoImageView.image = [UIImage imageWithData:[NSData
-                                                   dataWithContentsOfURL:[NSURL URLWithString:[myPhotos objectAtIndex:indexPath.row]]]];
-    
+     static NSString *identifier = @"Cell";
+   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+   UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+    photoImageView.image = self.images[indexPath.row];
     return cell;
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

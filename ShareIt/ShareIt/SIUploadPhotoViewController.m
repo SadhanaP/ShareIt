@@ -13,7 +13,7 @@
 
 @implementation SIUploadPhotoViewController
 
-static NSString * const uploadAlbumUrl=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/549/photo";
+static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/549/photo";
 
 - (void) tapped
 
@@ -26,6 +26,15 @@ static NSString * const uploadAlbumUrl=@"http://52.8.15.49:8080/photoshare/api/v
     [super viewDidLoad];
     // scroll view
     self.scrollView.contentSize = CGSizeMake(320, 700);
+    
+    uploadPhotoUrl = @"http://52.8.15.49:8080/photoshare/api/v1/users/";
+    uploadPhotoUrl = [uploadPhotoUrl stringByAppendingString:_userID];
+    uploadPhotoUrl = [uploadPhotoUrl stringByAppendingString:@"/album/"];
+    uploadPhotoUrl = [uploadPhotoUrl stringByAppendingString:_albumID];
+    uploadPhotoUrl = [uploadPhotoUrl stringByAppendingString:@"/photo"];
+    
+    NSLog(@"getPhotoURL: %@", uploadPhotoUrl);
+    
     
     UITapGestureRecognizer *tapScroll = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped)];
     tapScroll.cancelsTouchesInView = NO;
@@ -66,10 +75,10 @@ static NSString * const uploadAlbumUrl=@"http://52.8.15.49:8080/photoshare/api/v
     //NSString *userId= @"id"; // replace with user id
     //NSString *albumId= @"albumId"; // replace with
     
-    NSDictionary *params = @{@"public":@"true", @"metadata":@"san jose"};
+    NSDictionary *params = @{@"location":@"san jose", @"metadata":@"flower", @"public":@"true"};
     
     AFHTTPRequestOperationManager *sharedManager = [AFHTTPRequestOperationManager manager];;
-    [sharedManager POST:uploadAlbumUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [sharedManager POST:uploadPhotoUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if(_imageUploadView.image){
             [formData appendPartWithFileData:UIImageJPEGRepresentation(_imageUploadView.image, 0.5) name:@"thumbnail" fileName:@"avatar.jpg" mimeType:@"image/jpeg" ];
         }
@@ -82,12 +91,13 @@ static NSString * const uploadAlbumUrl=@"http://52.8.15.49:8080/photoshare/api/v
     }];
 
     //api call for upload
-    [hud show:NO];
-    SIPhotosViewController *photoController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIPhotosViewController"];
-    photoController.userID = self.userID;
-    //NSString *aId=[@(indexPath.row)description];
-    //photoController.albumID = [tableID objectAtIndex:[aId integerValue]];
-    photoController.albumID = self.albumID;
-    [self.navigationController pushViewController:photoController animated:YES];
+    [hud hide:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+//    SIPhotosViewController *photoController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIPhotosViewController"];
+//    photoController.userID = self.userID;
+//    //NSString *aId=[@(indexPath.row)description];
+//    //photoController.albumID = [tableID objectAtIndex:[aId integerValue]];
+//    photoController.albumID = self.albumID;
+//    [self.navigationController pushViewController:photoController animated:YES];
 }
 @end

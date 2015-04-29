@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShareIt/SIUploadPhotoViewController.m"
-            timestampString = "451940286.853795"
+            timestampString = "451990293.86607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-uploadToServer:"
             landmarkType = "5">
          </BreakpointContent>
