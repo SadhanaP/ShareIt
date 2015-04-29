@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="LSQ-aO-92E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="LSQ-aO-92E">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -110,14 +110,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" text="Search My Photos" id="oMT-Ob-Dqn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="UIa-b6-zYw" id="uCN-27-tsd"/>
-                                </connections>
-                            </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eY4-HJ-oI2">
                                 <rect key="frame" x="0.0" y="44" width="320" height="529"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -152,7 +144,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" id="ivS-4L-u6G" customClass="FBSDKProfilePictureView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="275"/>
+                                        <rect key="frame" x="0.0" y="-44" width="320" height="275"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -173,10 +165,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hke-96-ZdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="9iz-I5-hla">
                     <connections>
-                        <outlet property="delegate" destination="UIa-b6-zYw" id="VKi-5H-cPP"/>
-                        <outlet property="searchBar" destination="oMT-Ob-Dqn" id="YFz-l7-Zil"/>
-                        <outlet property="searchContentsController" destination="UIa-b6-zYw" id="22N-j2-MFN"/>
-                        <outlet property="searchResultsDataSource" destination="UIa-b6-zYw" id="zg1-4O-tYj"/>
                         <outlet property="searchResultsDelegate" destination="UIa-b6-zYw" id="4Fo-IX-Ezv"/>
                     </connections>
                 </searchDisplayController>
@@ -235,7 +223,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="EOq-nT-as0">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>

@@ -11,7 +11,9 @@
 #import "AFNetworking.h"
 #import "SIUploadPhotoViewController.h"
 
+#define ResultsTableView self.searchResultsTableViewController.tableView
 
+#define Identifier @"Cell"
 
 @implementation SIAlbumsViewController
 
@@ -34,22 +36,83 @@ static NSString * getAlbumsURL;
     
     _myTable.dataSource=self;
     [self fetchAlbums];
+    
+    self.results = [[NSMutableArray alloc] init];
+    
+    // A table view for results.
+    UITableView *searchResultsTableView = [[UITableView alloc] initWithFrame:self.tableView.frame];
+    searchResultsTableView.dataSource = self;
+    searchResultsTableView.delegate = self;
+    
+    // Registration of reuse identifiers.
+    [searchResultsTableView registerClass:UITableViewCell.class forCellReuseIdentifier:Identifier];
+    [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:Identifier];
+    
+    // Init a search results table view controller and setting its table view.
+    self.searchResultsTableViewController = [[UITableViewController alloc] init];
+    self.searchResultsTableViewController.tableView = searchResultsTableView;
+    
+    // Init a search controller with its table view controller for results.
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.searchResultsTableViewController];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.delegate = self;
+    
+    // Make an appropriate size for search bar and add it as a header view for initial table view.
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    // Enable presentation context.
+    self.definesPresentationContext = YES;
+    
 }
+
+
+#pragma mark - Table View Data Source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [tableData count];
+    if ([tableView isEqual:ResultsTableView]) {
+        if (self.results) {
+            return self.results.count;
+        } else {
+            return 0;
+        }
+    } else {
+        
+        return [tableData count];
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"SimpleTableItem";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }    
-    cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:Identifier forIndexPath:indexPath];
+    
+    NSString *text;
+    if ([tableView isEqual:ResultsTableView]) {
+        text = self.results[indexPath.row];
+    }
+    else{
+        text=tableData[indexPath.row];
+    }
+ cell.textLabel.text = text;
+    
     return cell;
+    
+//    
+//    static NSString *simpleTableIdentifier = @"SimpleTableItem";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+//    }    
+//    cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
+//    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,6 +214,53 @@ static NSString * getAlbumsURL;
         NSLog(@"Error: %@", error);
     }];
 }
+
+
+
+#pragma mark - Search Results Updating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    UISearchBar *searchBar = searchController.searchBar;
+    if (searchBar.text.length > 0) {
+        NSString *text = searchBar.text;
+        NSLog(@"SEARCH STRING %@",text);
+        
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *album, NSDictionary *bindings) {
+           
+            NSRange range = [album rangeOfString:text options:NSCaseInsensitiveSearch];
+            // NSLog(range);
+            return range.location != NSNotFound;
+        }];
+        
+        // Set up results.
+        NSArray *searchResults = [tableData filteredArrayUsingPredicate:predicate];
+        self.results = searchResults;
+         NSLog(@"SEARCH RESULTS %@",searchResults);
+        // Reload search table view.
+        [self.searchResultsTableViewController.tableView reloadData];
+    }
+}
+
+#pragma mark - Search Controller Delegate
+
+- (void)didDismissSearchController:(UISearchController *)searchController {
+    [self dismissSearchBarAnimated:YES];
+}
+
+#pragma mark - Util methods
+
+- (void)dismissSearchBarAnimated: (BOOL)animated {
+    CGFloat offset = (self.searchController.searchBar.bounds.size.height) - (self.navigationController.navigationBar.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height);
+    
+    if (animated) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.tableView.contentOffset = CGPointMake(0, offset);
+        }];
+    } else {
+        self.tableView.contentOffset = CGPointMake(0, offset);
+    }
+}
+
 
 @end
 
