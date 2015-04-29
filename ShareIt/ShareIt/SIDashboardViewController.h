@@ -17,7 +17,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property(nonatomic) NSString *_temp;
 
-@property(nonatomic) NSData *uid;
+@property(nonatomic) NSString *uid;
 
 @property(nonatomic) FBSDKAccessToken *myAccessToken;
 

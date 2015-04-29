@@ -18,13 +18,20 @@
 NSMutableArray *tableData;
 NSMutableArray *tableID;
 NSInteger i;
-
-
-static NSString * const getAlbumsURL=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album";
+static NSString * getAlbumsURL;
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    
+    NSLog(@"userID: %@", _userID);
+    
+    getAlbumsURL = @"http://52.8.15.49:8080/photoshare/api/v1/users/";
+    getAlbumsURL = [getAlbumsURL stringByAppendingString:_userID];
+    getAlbumsURL = [getAlbumsURL stringByAppendingString:@"/album"];
+    NSLog(@"getAlbumsURL: %@", getAlbumsURL);
+    
     _myTable.dataSource=self;
     [self fetchAlbums];
 }
@@ -53,7 +60,6 @@ static NSString * const getAlbumsURL=@"http://52.8.15.49:8080/photoshare/api/v1/
     //photoController.albumID = [tableID objectAtIndex:[aId integerValue]];
     photoController.albumID = tableID [indexPath.row];
     [self.navigationController pushViewController:photoController animated:YES];
-
     }
 
 - (IBAction)addAlbum:(id)sender {

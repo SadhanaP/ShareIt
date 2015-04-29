@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SIPhotosViewController : UICollectionViewController 
-@property(nonatomic) NSData *userID;
+@property(nonatomic) NSString *userID;
 @property(nonatomic) NSString *albumID;
 
 - (IBAction)addMoreButton:(id)sender;

@@ -67,8 +67,8 @@
         self.continueButton.hidden=NO;        
     }
     
-  self.loginButton.publishPermissions = @[@"publish_actions"];
-  self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+  //self.loginButton.publishPermissions = @[@"publish_actions"];
+  self.loginButton.readPermissions = @[@"email", @"public_profile", @"user_friends"];
  [_loginButton setDelegate:self];
   [self _configurePhotos];
 }
@@ -79,7 +79,7 @@ didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
                error: 	(NSError *)error{
      self.continueButton.hidden=YES;
      self.myDashboard.hidden=NO;
-    NSLog(@"U are suceesfully logged in hereeeee");
+    NSLog(@"Logged in");
     
 }
 
@@ -88,7 +88,7 @@ didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
     self.continueButton.hidden=NO;
     self.myDashboard.hidden=YES;
 
-    NSLog(@"U are suceesfully logged out");
+    NSLog(@"Logged out");
     
 }
 
@@ -141,6 +141,7 @@ didCompleteWithResult: 	(FBSDKLoginManagerLoginResult *)result
 - (IBAction)continue:(id)sender {
     SIDashboardViewController *dashboardController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIDashboardViewController"];
     dashboardController.myAccessToken = [FBSDKAccessToken currentAccessToken];
+    dashboardController.uid = @"0";
     [self.navigationController pushViewController:dashboardController animated:YES];
 }
 

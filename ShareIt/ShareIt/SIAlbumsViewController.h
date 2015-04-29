@@ -11,7 +11,7 @@
 @interface SIAlbumsViewController : UITableViewController <UITableViewDelegate,UITableViewDataSource, UIAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *myTable;
-@property(nonatomic) NSData *userID;
+@property(nonatomic) NSString *userID;
 //@property (strong, nonatomic) NSDictionary *dataDict;
 //@property (strong, nonatomic) NSMutableArray *dataArary;
 

@@ -10,7 +10,7 @@
 
 @interface SIUploadPhotoViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageUploadView;
-@property(nonatomic) NSData *userID;
+@property(nonatomic) NSString *userID;
 @property(nonatomic) NSString *albumID;
 
 - (IBAction)choosePhoto:(id)sender;
