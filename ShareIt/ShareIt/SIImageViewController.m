@@ -33,9 +33,9 @@
 
 - (IBAction)sharePic:(id)sender {
     // Email Subject
-    NSString *emailTitle = @"Test Email";
+    NSString *emailTitle = @"ShareIt! ";
     // Email Content
-    NSString *messageBody = @"Hey There";
+    NSString *messageBody = @"ImageURL...";
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:@"sadhana@gmail.com"];
     

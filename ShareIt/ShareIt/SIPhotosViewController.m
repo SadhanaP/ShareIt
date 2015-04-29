@@ -17,7 +17,6 @@ static NSString * getPhotoURL;
 //=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/549/photo/593";
 
 @implementation SIPhotosViewController
-NSMutableArray *myPhotos1;
 NSMutableArray *myPhotos;
 NSString *tempUrl;
 NSInteger i;
@@ -42,16 +41,16 @@ NSInteger i;
     
     
            // Initialize recipe image array
-    //myPhotos = [NSMutableArray arrayWithObjects: @"Goofy.png", @"Liking.png", @"Viking.png", nil];
+    myPhotos = [NSMutableArray arrayWithObjects: @"Goofy.png", @"Liking.png", @"Viking.png", nil];
     
     
-    myPhotos = [[NSMutableArray alloc] init];
+    //myPhotos = [[NSMutableArray alloc] init];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:getPhotoURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
        NSLog(@"response object count: %@",responseObject);
 
     
-        NSLog(@"response object count1: %lu",[[responseObject objectAtIndex:4] count]);
+       // NSLog(@"response object count1: %lu",[[responseObject objectAtIndex:0] count]);
         NSLog(@"response object count2: %lu",[responseObject count]);
         
         NSLog(@"response object count2: %@",[responseObject objectAtIndex:0]);
@@ -65,8 +64,9 @@ NSInteger i;
             NSString *ImgUrl = obj[@"photoUrl"];
             NSLog(@"url : %@",ImgUrl);
     
-    
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
+            
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
+           // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]]];
     
      NSLog(@"image : %@",image);
             
@@ -120,6 +120,7 @@ NSInteger i;
     SIImageViewController *imageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIImageViewController"];
     imageViewController.userID = self.userID;
     imageViewController.albumID = self.albumID;
+    //imageViewController.photoID = [@(indexPath.row)description];
     imageViewController.photoID = [@(indexPath.row)description];
     imageViewController.photoImageName = myPhotos[indexPath.row];
     [self.navigationController pushViewController:imageViewController animated:YES];
