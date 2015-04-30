@@ -18,8 +18,10 @@
 @property(nonatomic) NSString *userID;
 @property(nonatomic) NSString *albumID;
 @property(nonatomic) NSString *photoID;
+@property(nonatomic) NSString *arriveFromSearch;
 - (IBAction)sharePic:(id)sender;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 - (IBAction)deletePic:(id)sender;
 

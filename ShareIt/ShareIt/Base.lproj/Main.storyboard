@@ -118,7 +118,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YD5-Fi-NAS">
-                                        <rect key="frame" x="10" y="394" width="300" height="40"/>
+                                        <rect key="frame" x="10" y="440" width="300" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.093060930788838606" green="0.25607846637323678" blue="0.54616477272727271" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="My Albums">
@@ -133,27 +133,6 @@
                                             <action selector="displayAlbums:" destination="UIa-b6-zYw" eventType="touchUpInside" id="GNT-lO-I2B"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5Ju-bB-4Vk">
-                                        <rect key="frame" x="10" y="452" width="300" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.093060930788838606" green="0.25607846637323678" blue="0.54616477272727271" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Search Photos">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="searchPublicPhotos:" destination="UIa-b6-zYw" eventType="touchUpInside" id="Sp5-8j-AEh"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" id="ivS-4L-u6G" customClass="FBSDKProfilePictureView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="327"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="60D-U9-q6P">
                                         <rect key="frame" x="10" y="329" width="300" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -168,6 +147,27 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" id="ivS-4L-u6G" customClass="FBSDKProfilePictureView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="327"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5Ju-bB-4Vk">
+                                        <rect key="frame" x="10" y="383" width="300" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.093060930788838606" green="0.25607846637323678" blue="0.54616477272727271" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Search Photos">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="searchPublicPhotos:" destination="UIa-b6-zYw" eventType="touchUpInside" id="Sp5-8j-AEh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -176,6 +176,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="LdA-F4-Iuc"/>
                     <connections>
+                        <outlet property="albumButton" destination="YD5-Fi-NAS" id="KkH-7k-rFK"/>
                         <outlet property="nameLabel" destination="60D-U9-q6P" id="hF4-so-JxG"/>
                         <outlet property="profilePicture" destination="ivS-4L-u6G" id="p1U-hi-Y0e"/>
                         <outlet property="scrollView" destination="eY4-HJ-oI2" id="8r1-Cg-bef"/>
@@ -326,6 +327,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="deleteButton" destination="wIp-hO-CQN" id="vIY-KK-GFH"/>
                         <outlet property="displayImage" destination="F8I-YF-MLk" id="ITq-r6-aLW"/>
                         <outlet property="picLocation" destination="W83-wh-Ox9" id="WcB-xE-ORv"/>
                         <outlet property="picMeta" destination="QdJ-by-fBO" id="gAd-hA-7dt"/>
@@ -405,18 +407,21 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="7uJ-Ev-vTP">
                                         <rect key="frame" x="90" y="299" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="yk5-Bj-i14">
                                         <rect key="frame" x="90" y="338" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="BFt-Aq-cOo">
                                         <rect key="frame" x="90" y="376" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>

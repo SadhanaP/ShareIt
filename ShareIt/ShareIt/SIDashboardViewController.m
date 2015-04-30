@@ -35,13 +35,14 @@ static NSString * const registerUserURL=@"http://52.8.15.49:8080/photoshare/api/
     NSLog(@"Access Token: %@",_myAccessToken);
     NSLog(@"User ID: %@",_uid);
     
+    
     if(_myAccessToken){
         [self returnUserProfileData];        
     }
-//    else{
-//        [self returnGuestProfileData];
-//    
-//    }
+    else{
+        _albumButton.hidden=YES;
+    
+    }
 }
 
 -(void) returnUserProfileData {

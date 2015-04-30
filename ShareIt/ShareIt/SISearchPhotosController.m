@@ -376,7 +376,9 @@ static NSString * getPhotoURL;
     
         imageViewController.albumID=[albumIDs objectAtIndex:indexPath.row];
     
-        imageViewController.photoID=[photoIDs objectAtIndex:indexPath.row];
+    imageViewController.photoID=[photoIDs objectAtIndex:indexPath.row];
+    
+    imageViewController.arriveFromSearch=@"true";
     
     
     

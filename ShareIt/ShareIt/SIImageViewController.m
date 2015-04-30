@@ -17,6 +17,7 @@ static NSString * getImageURL;
 
 
 NSString *tempUrl;
+NSString *message;
 NSString *pic_name;
 NSString *pic_loc;
 NSString *pic_meta;
@@ -37,6 +38,12 @@ NSInteger i;
     NSLog(@"userID: %@", _userID);
     NSLog(@"photoID: %@", _photoID);
     
+    
+    if([_arriveFromSearch isEqual:@"true"]){
+        self.deleteButton.hidden=YES;
+    }
+    
+    
     getImageURL = @"http://52.8.15.49:8080/photoshare/api/v1/users/";
     getImageURL = [getImageURL stringByAppendingString:_userID];
     getImageURL = [getImageURL stringByAppendingString:@"/album/"];
@@ -53,7 +60,7 @@ NSInteger i;
         if ([responseObject count]) {
             
             NSLog(@"response object: %@",[responseObject objectForKey:@"photoUrl"]);
-            
+            tempUrl=[responseObject objectForKey:@"photoUrl"];
             _displayImage.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[responseObject objectForKey:@"photoUrl"]]]];
             
             pic_name = @"Name: ";
@@ -109,11 +116,14 @@ NSInteger i;
 
 - (IBAction)sharePic:(id)sender {
     // Email Subject
-    NSString *emailTitle = @"ShareIt! ";
+    NSString *emailTitle = @"ShareIt! iOS App";
     // Email Content
-    NSString *messageBody = @"ImageURL...";
+    
+    message = [message stringByAppendingString:@"Hey, Checkout this Photo!! \n"];
+    message = [message stringByAppendingString:tempUrl];
+    NSString *messageBody = message;
     // To address
-    NSArray *toRecipents = [NSArray arrayWithObject:@"sadhana@gmail.com"];
+    NSArray *toRecipents = [NSArray arrayWithObject:@""];
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     mc.mailComposeDelegate = self;

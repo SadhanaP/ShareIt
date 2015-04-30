@@ -26,5 +26,6 @@
 
 @property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePicture;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *albumButton;
 
 @end

@@ -53,7 +53,17 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-  return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleLightContent;
+}
+- (void)pickButton
+{
+    if([FBSDKAccessToken currentAccessToken]){
+    self.continueButton.hidden=YES;
+    }
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [self pickButton];
 }
 
 - (void)viewDidLoad
@@ -63,9 +73,7 @@
     
     self.myDashboard.hidden=NO;
     self.continueButton.hidden=NO;
-    if([FBSDKAccessToken currentAccessToken]){
-        self.continueButton.hidden=YES;
-    }
+    [self pickButton];
     
   //self.loginButton.publishPermissions = @[@"publish_actions"];
   self.loginButton.readPermissions = @[@"email", @"public_profile", @"user_friends"];
