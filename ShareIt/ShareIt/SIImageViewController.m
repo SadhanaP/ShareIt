@@ -17,7 +17,7 @@ static NSString * getImageURL;
 
 
 NSString *tempUrl;
-NSString *message;
+NSString *message=@"";
 NSString *pic_name;
 NSString *pic_loc;
 NSString *pic_meta;
@@ -114,25 +114,63 @@ NSInteger i;
 }
 
 
+
 - (IBAction)sharePic:(id)sender {
-    // Email Subject
-    NSString *emailTitle = @"ShareIt! iOS App";
-    // Email Content
     
-    message = [message stringByAppendingString:@"Hey, Checkout this Photo!! \n"];
-    message = [message stringByAppendingString:tempUrl];
-    NSString *messageBody = message;
-    // To address
-    NSArray *toRecipents = [NSArray arrayWithObject:@""];
+        // Email Subject
+        NSString *emailTitle = @"ShareIt! iOS App";
+        //NSString
+        // Email Content
+        NSArray *tiniurl;
+        tiniurl = [tempUrl componentsSeparatedByString:@"?"];
+        NSString *small= tiniurl[0];
+        NSString *bodyText =@"<html>";
+        bodyText = [bodyText stringByAppendingString:@"<head>"];
+        bodyText = [bodyText stringByAppendingString:@"</head>"];
+        bodyText = [bodyText stringByAppendingString:@"<body>"];
+        bodyText = [bodyText stringByAppendingString:@"<p>Hey buddy Check out this cool pic @ShareIt!<p>"];
+        bodyText = [bodyText stringByAppendingString:@"<a href="];
+        bodyText = [bodyText stringByAppendingString:small];
+        bodyText = [bodyText stringByAppendingString:@">View with ShareIt!"];
+        bodyText = [bodyText stringByAppendingString:@"</a>"];
+        //[mailComposer setMessageBody:bodyText isHTML:YES];
+        message = [message stringByAppendingString:@"Hey, Checkout this Photo!! \n"];
+        message = [message stringByAppendingString:small];
+        NSLog(@"%@",tempUrl);
+        NSString *messageBody = message;
+        NSLog(@"Message!!:%@",messageBody);
+        // To address
+        NSArray *toRecipents = [NSArray arrayWithObject:@""];
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setSubject:emailTitle];
+        [mc setMessageBody:bodyText isHTML:YES];
+        [mc setToRecipients:toRecipents];
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
     
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    mc.mailComposeDelegate = self;
-    [mc setSubject:emailTitle];
-    [mc setMessageBody:messageBody isHTML:NO];
-    [mc setToRecipients:toRecipents];
     
-    // Present mail view controller on screen
-    [self presentViewController:mc animated:YES completion:NULL];
+//    // Email Subject
+//    NSString *emailTitle = @"ShareIt! iOS App";
+//    // Email Content
+//    
+//    message = [message stringByAppendingString:@"Hey, Checkout this Photo!! \n"];
+//    message = [message stringByAppendingString:tempUrl];
+//    NSLog(@"%@",message);
+//    NSString *messageBody = message;
+//    // To address
+//    NSArray *toRecipents = [NSArray arrayWithObject:@""];
+//    
+//    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+//    mc.mailComposeDelegate = self;
+//    [mc setSubject:emailTitle];
+//    [mc setMessageBody:messageBody isHTML:NO];
+//    [mc setToRecipients:toRecipents];
+//    
+//    // Present mail view controller on screen
+//    [self presentViewController:mc animated:YES completion:NULL];
 }
 
 

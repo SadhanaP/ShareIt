@@ -34,15 +34,15 @@
 + (NSArray *)demoPhotos
 {
   return @[
-           [SIPhoto photoWithObjectURL:[NSURL URLWithString:@"http://shareitexampleapp.parseapp.com/goofy/"]
+           [SIPhoto photoWithObjectURL:[NSURL URLWithString:@"http://s24.postimg.org/qfgie43z9/goofy.png"]
                                  title:@"Make a Goofy Face"
                                 rating:5
                                  image:[UIImage imageNamed:@"Goofy"]],
-           [SIPhoto photoWithObjectURL:[NSURL URLWithString:@"http://shareitexampleapp.parseapp.com/viking/"]
-                                 title:@"Happy Viking, Happy Liking"
+           [SIPhoto photoWithObjectURL:[NSURL URLWithString:@"http://s8.postimg.org/65wp736id/liking.png"]
+                                 title:@"Happy Sharing"
                                 rating:3
                                  image:[UIImage imageNamed:@"Viking"]],
-           [SIPhoto photoWithObjectURL:[NSURL URLWithString:@"http://shareitexampleapp.parseapp.com/liking/"]
+           [SIPhoto photoWithObjectURL:[NSURL URLWithString:@"http://s9.postimg.org/u9b7avlpb/viking.png"]
                                  title:@"Happy Liking, Happy Viking"
                                 rating:4
                                  image:[UIImage imageNamed:@"Liking"]],
