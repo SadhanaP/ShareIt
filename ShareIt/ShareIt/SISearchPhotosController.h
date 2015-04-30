@@ -11,10 +11,22 @@
 
 @interface SISearchPhotosController : UITableViewController <UISearchResultsUpdating, UISearchControllerDelegate>
 
-
 @property (strong, nonatomic) UISearchController *searchController;
+
 @property (strong, nonatomic) UITableViewController *searchResultsTableViewController;
+
 @property (weak, nonatomic) IBOutlet UITableView *myTable;
+
 @property (strong, nonatomic) NSArray *results;
+
+@property(nonatomic) NSString *userID;
+
+@property(nonatomic) NSString *albumID;
+
+@property (nonatomic, strong) NSArray *images;
+
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end

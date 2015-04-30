@@ -61,10 +61,10 @@
   [super viewDidLoad];
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
     
-    self.myDashboard.hidden=YES;
+    self.myDashboard.hidden=NO;
+    self.continueButton.hidden=NO;
     if([FBSDKAccessToken currentAccessToken]){
-        self.myDashboard.hidden=NO;
-        self.continueButton.hidden=NO;        
+        self.continueButton.hidden=YES;
     }
     
   //self.loginButton.publishPermissions = @[@"publish_actions"];
