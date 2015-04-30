@@ -13,8 +13,8 @@
 
 @implementation SIUploadPhotoViewController
 
-static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/549/photo";
-
+static NSString * uploadPhotoUrl;
+//=@"http://52.8.15.49:8080/photoshare/api/v1/users/10204183147442507/album/549/photo"
 - (void) tapped
 
 {
@@ -26,6 +26,7 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
     [super viewDidLoad];
     // scroll view
     self.scrollView.contentSize = CGSizeMake(320, 700);
+    self.property = @"true";
     
     uploadPhotoUrl = @"http://52.8.15.49:8080/photoshare/api/v1/users/";
     uploadPhotoUrl = [uploadPhotoUrl stringByAppendingString:_userID];
@@ -98,6 +99,8 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
     //api call for upload
     //[hud hide:YES];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    
 //    SIPhotosViewController *photoController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIPhotosViewController"];
 //    photoController.userID = self.userID;
 //    //NSString *aId=[@(indexPath.row)description];
@@ -113,5 +116,6 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
     } else {
         self.property = @"false";
     }
+    NSLog(@"%@",self.property);
 }
 @end

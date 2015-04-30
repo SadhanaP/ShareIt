@@ -20,11 +20,13 @@ static NSString * getPhotoURL;
 
 NSString *tempUrl;
 NSInteger i;
+NSMutableArray *photoID;
 
-
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
+    [self.collectionView reloadData];
     [super viewDidLoad];
+    //[self.view setNeedsDisplay];
     NSLog(@"Album ID: %@", self.albumID);
     
     NSLog(@"userID: %@", _userID);
@@ -44,23 +46,30 @@ NSInteger i;
         if ([responseObject count]) {
             
             NSMutableArray *mutableImages = [NSMutableArray arrayWithCapacity:[responseObject count]];
+            photoID = [NSMutableArray arrayWithCapacity:[responseObject count]];
     
         NSLog(@"response object count: %lu",[responseObject count]);
         
         //NSLog(@"response object count2: %@",[responseObject objectAtIndex:0]);
         NSDictionary *dataDict = (NSDictionary *) [responseObject objectAtIndex:0];
-        NSLog(@"dataDict: %@",dataDict);
-        NSLog(@"URL: %@",dataDict[@"photoUrl"]);
+            NSLog(@"dataDict: %@",dataDict);
+            NSLog(@"URL: %@",dataDict[@"photoUrl"]);
     
     
-        for (i=0; i<[responseObject count]; i++) {
-            NSDictionary *obj = (NSDictionary *) [responseObject objectAtIndex:i];
-            NSString *ImgUrl = obj[@"photoUrl"];
-            NSLog(@"url %lu : %@",i,ImgUrl);
+            for (i=0; i<[responseObject count]; i++) {
+                NSDictionary *obj = (NSDictionary *) [responseObject objectAtIndex:i];
+            NSLog(@"OBJ: %@",obj);
+                NSString *ImgUrl = obj[@"photoUrl"];
+                NSLog(@"url %lu : %@",i,ImgUrl);
+                NSString *ph_id = obj[@"photoId"];
+                NSLog(@"ph_id %lu : %@",i,ph_id);
     
             UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]] ];
             if(image){
-             [mutableImages addObject:image];
+                [mutableImages addObject:image];
+                NSLog(@"OBJ Ph_id: %@",obj[@"photoId"]);
+                [photoID addObject:ph_id];
+                NSLog(@"photoID Array: %@",photoID);
             }
             //@"https://photoshareappcmpe277.s3-us-west-1.amazonaws.com/pic-st-loup-herault-le-languedoc1430071277595.gif?AWSAccessKeyId=AKIAJRSSTBSKXU62UWUA&Expires=1461607278&Signature=1dMau3wbine58Y9wiai5J5n0DNU%3D"
             
@@ -132,7 +141,10 @@ NSInteger i;
     imageViewController.userID = self.userID;
     imageViewController.albumID = self.albumID;
     //imageViewController.photoID = [@(indexPath.row)description];
-    imageViewController.photoID = [@(indexPath.row)description];
+    //imageViewController.photoID = [@(indexPath.row)description];
+    
+    imageViewController.photoID = photoID[indexPath.row];
+
    // imageViewController.photoImageName = myPhotos[indexPath.row];
     [self.navigationController pushViewController:imageViewController animated:YES];
     

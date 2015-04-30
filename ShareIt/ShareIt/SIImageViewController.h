@@ -21,6 +21,7 @@
 - (IBAction)sharePic:(id)sender;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+- (IBAction)deletePic:(id)sender;
 
 
 

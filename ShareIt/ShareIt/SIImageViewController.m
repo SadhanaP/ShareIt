@@ -6,9 +6,20 @@
 //  Copyright (c) 2015 Example. All rights reserved.
 //
 
+#import "SIPhotosViewController.h"
 #import "SIImageViewController.h"
+#import "SIUploadPhotoViewController.h"
+#import "AFNetworking.h"
+
+static NSString * getImageURL;
 
 @implementation SIImageViewController
+
+
+NSString *tempUrl;
+NSInteger i;
+
+
 - (void) tapped
 
 {
@@ -18,15 +29,66 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"Album ID: %@", self.albumID);
+    
+    NSLog(@"userID: %@", _userID);
+    NSLog(@"photoID: %@", _photoID);
+    
+    getImageURL = @"http://52.8.15.49:8080/photoshare/api/v1/users/";
+    getImageURL = [getImageURL stringByAppendingString:_userID];
+    getImageURL = [getImageURL stringByAppendingString:@"/album/"];
+    getImageURL = [getImageURL stringByAppendingString:_albumID];
+    getImageURL = [getImageURL stringByAppendingString:@"/photo/"];
+    getImageURL = [getImageURL stringByAppendingString:_photoID];
+    
+    NSLog(@"getPhotoURL: %@", getImageURL);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:getImageURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response object: %@",responseObject);
+        
+        if ([responseObject count]) {
+            
+            NSLog(@"response object: %@",[responseObject objectForKey:@"photoUrl"]);
+            
+            _displayImage.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[responseObject objectForKey:@"photoUrl"]]]];
+            
+        }
+                
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // scroll view
     self.scrollView.contentSize = CGSizeMake(320, 700);
     
     UITapGestureRecognizer *tapScroll = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped)];
     tapScroll.cancelsTouchesInView = NO;
     [_scrollView addGestureRecognizer:tapScroll];
-//    _displayImage.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
-    [super viewDidLoad];
-    self.displayImage.image = [UIImage imageNamed:self.photoImageName];
+
+    
+    
+    //    _displayImage.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
+    //[super viewDidLoad];
+    
+    
+    
+    
+    //self.displayImage.image = [UIImage imageNamed:self.photoImageName];
     
 }
 
@@ -74,4 +136,19 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (IBAction)deletePic:(id)sender {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager DELETE:getImageURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response object: %@",responseObject);
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 @end
