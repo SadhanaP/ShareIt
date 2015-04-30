@@ -133,7 +133,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="SGX-cy-UT5" kind="push" id="a09-Un-ioC"/>
+                                            <action selector="searchPublicPhotos:" destination="UIa-b6-zYw" eventType="touchUpInside" id="Sp5-8j-AEh"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="60D-U9-q6P">
@@ -171,42 +171,26 @@
             </objects>
             <point key="canvasLocation" x="657" y="-365"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="K0B-SW-oXf">
+        <!--SISearchPhotosController-->
+        <scene sceneID="TwM-iB-tEa">
             <objects>
-                <viewController id="SGX-cy-UT5" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BBt-7H-Rb8">
+                <viewController storyboardIdentifier="SISearchPhotosController" id="wUP-aQ-GWA" userLabel="SISearchPhotosController" customClass="SISearchPhotosController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="btw-ZK-k0V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" text="Search Public Photos" id="3lv-Hy-2lA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="SGX-cy-UT5" id="rHA-oh-uPW"/>
-                                </connections>
-                            </searchBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="e42-vw-G1I"/>
+                        <connections>
+                            <outlet property="dataSource" destination="wUP-aQ-GWA" id="P0b-8x-FTc"/>
+                            <outlet property="delegate" destination="wUP-aQ-GWA" id="Gfm-KM-nZy"/>
+                        </connections>
+                    </tableView>
                     <connections>
-                        <outlet property="searchDisplayController" destination="jSq-fI-E14" id="SDb-9h-8DC"/>
+                        <outlet property="myTable" destination="btw-ZK-k0V" id="RMA-gi-g8i"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WZf-I5-Gzb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="jSq-fI-E14">
-                    <connections>
-                        <outlet property="delegate" destination="SGX-cy-UT5" id="z5d-oX-Tbb"/>
-                        <outlet property="searchBar" destination="3lv-Hy-2lA" id="iFb-ul-Una"/>
-                        <outlet property="searchContentsController" destination="SGX-cy-UT5" id="Z2N-sv-Twd"/>
-                        <outlet property="searchResultsDataSource" destination="SGX-cy-UT5" id="Ze2-vA-y6Z"/>
-                        <outlet property="searchResultsDelegate" destination="SGX-cy-UT5" id="Ohv-Yb-rGv"/>
-                    </connections>
-                </searchDisplayController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yQ5-lL-NsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="657" y="346"/>
+            <point key="canvasLocation" x="657" y="289"/>
         </scene>
         <!--SIPhotosViewController-->
         <scene sceneID="ZyZ-uJ-xha">
@@ -275,21 +259,21 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oEO-rM-boY">
-                                        <rect key="frame" x="23" y="356" width="288" height="21"/>
+                                        <rect key="frame" x="23" y="355" width="288" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W83-wh-Ox9">
-                                        <rect key="frame" x="23" y="393" width="288" height="21"/>
+                                        <rect key="frame" x="23" y="390" width="120" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QdJ-by-fBO">
-                                        <rect key="frame" x="23" y="422" width="288" height="21"/>
+                                        <rect key="frame" x="23" y="422" width="120" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -371,13 +355,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PJ0-tq-6e5">
-                                        <rect key="frame" x="44" y="319" width="51" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DpT-5N-05e">
                                         <rect key="frame" x="23" y="358" width="72" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -436,6 +413,13 @@
                                             <action selector="choosePhoto:" destination="ekP-Lg-J8z" eventType="touchUpInside" id="rdc-IW-uh4"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PJ0-tq-6e5">
+                                        <rect key="frame" x="39" y="318" width="51" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -443,6 +427,13 @@
                     </view>
                     <connections>
                         <outlet property="imageUploadView" destination="CNN-8b-GPY" id="uN0-sP-iSm"/>
+                        <outlet property="locationLbl" destination="DpT-5N-05e" id="kXx-vQ-KHz"/>
+                        <outlet property="locationTxtField" destination="yk5-Bj-i14" id="arF-dB-Ipn"/>
+                        <outlet property="mySwitch" destination="bYY-cp-YmS" id="uv0-v7-Vu1"/>
+                        <outlet property="nameLbl" destination="PJ0-tq-6e5" id="fKS-jO-FXC"/>
+                        <outlet property="nameTxtField" destination="7uJ-Ev-vTP" id="mus-fB-PsB"/>
+                        <outlet property="noteTxtField" destination="BFt-Aq-cOo" id="FYk-Jl-XID"/>
+                        <outlet property="notelbl" destination="c5e-Zx-oct" id="zqE-At-2tp"/>
                         <outlet property="scrollView" destination="9o9-cc-5e5" id="7cJ-JS-ZNe"/>
                     </connections>
                 </viewController>

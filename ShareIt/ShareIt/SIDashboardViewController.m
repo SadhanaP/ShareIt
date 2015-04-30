@@ -8,6 +8,7 @@
 
 #import "SIDashboardViewController.h"
 #import "SIAlbumsViewController.h"
+#import "SISearchPhotosController.h"
 #import "SIMainViewController.h"
 #import "AFNetworking.h"
 
@@ -123,5 +124,12 @@ static NSString * const registerUserURL=@"http://52.8.15.49:8080/photoshare/api/
     SIAlbumsViewController *albumsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIAlbumsViewController"];
     albumsController.userID = _uid;
     [self.navigationController pushViewController:albumsController animated:YES];
+}
+- (IBAction)searchPublicPhotos:(id)sender {
+    SISearchPhotosController *searchPhotosController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SISearchPhotosController"];
+  
+    [self.navigationController pushViewController:searchPhotosController animated:YES];
+    
+    
 }
 @end

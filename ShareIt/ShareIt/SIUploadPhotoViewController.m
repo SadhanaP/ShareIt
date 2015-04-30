@@ -34,7 +34,8 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
     uploadPhotoUrl = [uploadPhotoUrl stringByAppendingString:@"/photo"];
     
     NSLog(@"getPhotoURL: %@", uploadPhotoUrl);
-    
+    [self.mySwitch addTarget:self
+                      action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
     
     UITapGestureRecognizer *tapScroll = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped)];
     tapScroll.cancelsTouchesInView = NO;
@@ -71,11 +72,15 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Uploading";
     [hud show:YES];
-
+    
     //NSString *userId= @"id"; // replace with user id
     //NSString *albumId= @"albumId"; // replace with
     
-    NSDictionary *params = @{@"location":@"san jose", @"metadata":@"flower", @"public":@"true"};
+    NSDictionary *params = @{@"photoName":self.nameTxtField.text,
+                             @"location":self.locationTxtField.text,
+                             @"metadata":self.noteTxtField.text,
+                             @"public":self.property};
+    NSLog(@"Dictionary values %@",params);
     
     AFHTTPRequestOperationManager *sharedManager = [AFHTTPRequestOperationManager manager];;
     [sharedManager POST:uploadPhotoUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -83,7 +88,7 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
             [formData appendPartWithFileData:UIImageJPEGRepresentation(_imageUploadView.image, 0.5) name:@"thumbnail" fileName:@"avatar.jpg" mimeType:@"image/jpeg" ];
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [hud show:NO];
+       // [hud show:NO];
         NSLog(@"Success");
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -91,7 +96,7 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
     }];
 
     //api call for upload
-    [hud hide:YES];
+    //[hud hide:YES];
     [self.navigationController popViewControllerAnimated:YES];
 //    SIPhotosViewController *photoController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIPhotosViewController"];
 //    photoController.userID = self.userID;
@@ -99,5 +104,14 @@ static NSString * uploadPhotoUrl=@"http://52.8.15.49:8080/photoshare/api/v1/user
 //    //photoController.albumID = [tableID objectAtIndex:[aId integerValue]];
 //    photoController.albumID = self.albumID;
 //    [self.navigationController pushViewController:photoController animated:YES];
+}
+
+- (void)stateChanged:(UISwitch *)switchState
+{
+    if ([switchState isOn]) {
+        self.property = @"true";
+    } else {
+        self.property = @"false";
+    }
 }
 @end

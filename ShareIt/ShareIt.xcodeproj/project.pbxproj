@@ -38,6 +38,7 @@
 		3F82205A1AEDE37B0072F74A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8220591AEDE37B0072F74A /* Security.framework */; };
 		3F82205C1AEDE3870072F74A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F82205B1AEDE3870072F74A /* SystemConfiguration.framework */; };
 		3F82205E1AEDE38F0072F74A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F82205D1AEDE38F0072F74A /* MobileCoreServices.framework */; };
+		875E6D421AF191C900AF4EBF /* SISearchPhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875E6D411AF191C900AF4EBF /* SISearchPhotosController.m */; };
 		89344A651909A28B0072DAC4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89344A641909A28B0072DAC4 /* Foundation.framework */; };
 		89344A671909A28B0072DAC4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89344A661909A28B0072DAC4 /* CoreGraphics.framework */; };
 		89344A6F1909A28B0072DAC4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89344A6D1909A28B0072DAC4 /* InfoPlist.strings */; };
@@ -110,6 +111,8 @@
 		3F8220591AEDE37B0072F74A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		3F82205B1AEDE3870072F74A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		3F82205D1AEDE38F0072F74A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		875E6D401AF191C900AF4EBF /* SISearchPhotosController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SISearchPhotosController.h; sourceTree = "<group>"; };
+		875E6D411AF191C900AF4EBF /* SISearchPhotosController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SISearchPhotosController.m; sourceTree = "<group>"; };
 		89344A611909A28B0072DAC4 /* ShareIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89344A641909A28B0072DAC4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		89344A661909A28B0072DAC4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -253,6 +256,8 @@
 				3F2455A31AECE9720088D861 /* MBProgressHUD.m */,
 				89344A7F1909A28B0072DAC4 /* Images.xcassets */,
 				89344A761909A28B0072DAC4 /* Main.storyboard */,
+				875E6D401AF191C900AF4EBF /* SISearchPhotosController.h */,
+				875E6D411AF191C900AF4EBF /* SISearchPhotosController.m */,
 				3F24559A1AECD1800088D861 /* SIUploadPhotoViewController.h */,
 				3F24559B1AECD1800088D861 /* SIUploadPhotoViewController.m */,
 				3F24558B1AECA4D40088D861 /* SIImageViewController.h */,
@@ -367,6 +372,7 @@
 				89344A7B1909A28B0072DAC4 /* SIMainViewController.m in Sources */,
 				3F82204B1AEDE33B0072F74A /* AFNetworkReachabilityManager.m in Sources */,
 				3F24558D1AECA4D40088D861 /* SIImageViewController.m in Sources */,
+				875E6D421AF191C900AF4EBF /* SISearchPhotosController.m in Sources */,
 				8976F076190AE8B100F1A7D7 /* SIPhoto.m in Sources */,
 				3F82204C1AEDE33B0072F74A /* AFSecurityPolicy.m in Sources */,
 				3F24558A1AEC90010088D861 /* SIPhotosViewController.m in Sources */,

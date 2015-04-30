@@ -19,6 +19,7 @@
 
 @property(nonatomic) NSString *uid;
 
+- (IBAction)searchPublicPhotos:(id)sender;
 @property(nonatomic) FBSDKAccessToken *myAccessToken;
 
 - (IBAction)displayAlbums:(id)sender;
