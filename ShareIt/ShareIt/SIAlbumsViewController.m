@@ -217,6 +217,57 @@ static NSString * getAlbumsURL;
 
 
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        SIPhotosViewController *photoController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIPhotosViewController"];
+        photoController.userID = self.userID;
+        //NSString *aId=[@(indexPath.row)description];
+        //photoController.albumID = [tableID objectAtIndex:[aId integerValue]];
+        photoController.albumID = tableID [indexPath.row];
+        NSString *albumId = photoController.albumID;
+        NSString *userId = photoController.userID;
+        NSLog(@"Album ID: %@", albumId);
+        NSLog(@"userID: %@", userId);
+        
+        NSString *removeAlbumUrl;
+        
+        removeAlbumUrl = @"http://52.8.15.49:8080/photoshare/api/v1/users/";
+        removeAlbumUrl = [removeAlbumUrl stringByAppendingString:userId];
+        removeAlbumUrl = [removeAlbumUrl stringByAppendingString:@"/album/"];
+        removeAlbumUrl = [removeAlbumUrl stringByAppendingString:albumId];
+        
+        NSLog(@"removeAlbumUrl: %@", removeAlbumUrl);
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager DELETE:removeAlbumUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response object: %@",responseObject);
+            [self fetchAlbums];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Album was deleted successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        //        alert.alertViewStyle = UIAlertViewStyleDefault;
+        //        [alert show];
+        
+        
+        
+        //remove the deleted object from your data source.
+        //If your data source is an NSMutableArray, do this
+        //        [self.results removeObjectAtIndex:indexPath.row];
+        
+        
+    }
+}
+
+
+
+
 #pragma mark - Search Results Updating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
