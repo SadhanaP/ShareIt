@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SIUploadPhotoViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SIUploadPhotoViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageUploadView;
 @property(nonatomic) NSString *userID;
 @property(nonatomic) NSString *albumID;

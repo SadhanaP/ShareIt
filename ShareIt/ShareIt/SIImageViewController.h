@@ -23,7 +23,10 @@
 
 - (IBAction)deletePic:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *picName;
 
+@property (weak, nonatomic) IBOutlet UILabel *picLocation;
+@property (weak, nonatomic) IBOutlet UILabel *picMeta;
 
 
 @end

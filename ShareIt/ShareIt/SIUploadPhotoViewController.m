@@ -91,15 +91,19 @@ static NSString * uploadPhotoUrl;
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
        // [hud show:NO];
         NSLog(@"Success");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Uploaded!!" delegate:self
+                                              cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        alert.alertViewStyle = UIAlertViewStyleDefault;
+        [alert show];
+        [hud hide:YES];
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Fail");
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 
     //api call for upload
-    //[hud hide:YES];
-    [self.navigationController popViewControllerAnimated:YES];
-    
     
 //    SIPhotosViewController *photoController = [[self storyboard] instantiateViewControllerWithIdentifier:@"SIPhotosViewController"];
 //    photoController.userID = self.userID;
@@ -108,6 +112,15 @@ static NSString * uploadPhotoUrl;
 //    photoController.albumID = self.albumID;
 //    [self.navigationController pushViewController:photoController animated:YES];
 }
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 
 - (void)stateChanged:(UISwitch *)switchState
 {

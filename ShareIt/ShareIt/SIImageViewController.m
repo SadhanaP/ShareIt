@@ -17,6 +17,9 @@ static NSString * getImageURL;
 
 
 NSString *tempUrl;
+NSString *pic_name;
+NSString *pic_loc;
+NSString *pic_meta;
 NSInteger i;
 
 
@@ -52,6 +55,17 @@ NSInteger i;
             NSLog(@"response object: %@",[responseObject objectForKey:@"photoUrl"]);
             
             _displayImage.image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[responseObject objectForKey:@"photoUrl"]]]];
+            
+            pic_name = @"Name: ";
+            pic_name = [pic_name stringByAppendingString:[responseObject objectForKey:@"photoName"]];
+            _picName.text= pic_name;
+            pic_loc = @"Location: ";
+            pic_loc = [pic_loc stringByAppendingString:[responseObject objectForKey:@"location"]];
+            _picLocation.text= pic_loc;
+            pic_meta = @"Note: ";
+            pic_meta = [pic_meta stringByAppendingString:[responseObject objectForKey:@"metadata"]];
+            _picMeta.text= pic_meta;
+            
             
         }
                 
@@ -140,7 +154,7 @@ NSInteger i;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     [manager DELETE:getImageURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response object: %@",responseObject);
+        NSLog(@"delete response object: %@",responseObject);
         
         
         

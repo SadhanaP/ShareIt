@@ -307,6 +307,9 @@
                     </view>
                     <connections>
                         <outlet property="displayImage" destination="F8I-YF-MLk" id="ITq-r6-aLW"/>
+                        <outlet property="picLocation" destination="W83-wh-Ox9" id="WcB-xE-ORv"/>
+                        <outlet property="picMeta" destination="QdJ-by-fBO" id="gAd-hA-7dt"/>
+                        <outlet property="picName" destination="oEO-rM-boY" id="XbE-l2-8bi"/>
                         <outlet property="scrollView" destination="0bu-eM-p0F" id="5O0-gm-J9X"/>
                     </connections>
                 </viewController>

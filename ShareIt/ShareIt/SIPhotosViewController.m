@@ -22,11 +22,29 @@ NSString *tempUrl;
 NSInteger i;
 NSMutableArray *photoID;
 
-- (void)viewWillAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL)animated{
+    NSLog(@"In Reloader");
+    [super viewWillAppear:YES];
+    
+    [self fetchPhotos];
+    
+//    [self.collectionView reloadData];
+//    [self.collectionView performBatchUpdates:^{
+//        [self.collectionView.collectionViewLayout invalidateLayout];
+//    } completion:^(BOOL finished) {
+//    }];
+
+}
+
+
+- (void)viewDidLoad
 {
-    [self.collectionView reloadData];
     [super viewDidLoad];
     //[self.view setNeedsDisplay];
+    [self fetchPhotos];
+}
+
+-(void) fetchPhotos{
     NSLog(@"Album ID: %@", self.albumID);
     
     NSLog(@"userID: %@", _userID);
@@ -36,50 +54,50 @@ NSMutableArray *photoID;
     getPhotoURL = [getPhotoURL stringByAppendingString:@"/album/"];
     getPhotoURL = [getPhotoURL stringByAppendingString:_albumID];
     getPhotoURL = [getPhotoURL stringByAppendingString:@"/photos/"];
-
+    
     NSLog(@"getPhotoURL: %@", getPhotoURL);
- 
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:getPhotoURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       NSLog(@"response object count: %@",responseObject);
-       
+        NSLog(@"response object count: %@",responseObject);
+        
         if ([responseObject count]) {
             
             NSMutableArray *mutableImages = [NSMutableArray arrayWithCapacity:[responseObject count]];
             photoID = [NSMutableArray arrayWithCapacity:[responseObject count]];
-    
-        NSLog(@"response object count: %lu",[responseObject count]);
-        
-        //NSLog(@"response object count2: %@",[responseObject objectAtIndex:0]);
-        NSDictionary *dataDict = (NSDictionary *) [responseObject objectAtIndex:0];
+            
+            NSLog(@"response object count: %lu",[responseObject count]);
+            
+            //NSLog(@"response object count2: %@",[responseObject objectAtIndex:0]);
+            NSDictionary *dataDict = (NSDictionary *) [responseObject objectAtIndex:0];
             NSLog(@"dataDict: %@",dataDict);
             NSLog(@"URL: %@",dataDict[@"photoUrl"]);
-    
-    
+            
+            
             for (i=0; i<[responseObject count]; i++) {
                 NSDictionary *obj = (NSDictionary *) [responseObject objectAtIndex:i];
-            NSLog(@"OBJ: %@",obj);
+                NSLog(@"OBJ: %@",obj);
                 NSString *ImgUrl = obj[@"photoUrl"];
                 NSLog(@"url %lu : %@",i,ImgUrl);
                 NSString *ph_id = obj[@"photoId"];
                 NSLog(@"ph_id %lu : %@",i,ph_id);
-    
-            UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]] ];
-            if(image){
-                [mutableImages addObject:image];
-                NSLog(@"OBJ Ph_id: %@",obj[@"photoId"]);
-                [photoID addObject:ph_id];
-                NSLog(@"photoID Array: %@",photoID);
+                
+                UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]] ];
+                if(image){
+                    [mutableImages addObject:image];
+                    NSLog(@"OBJ Ph_id: %@",obj[@"photoId"]);
+                    [photoID addObject:ph_id];
+                    NSLog(@"photoID Array: %@",photoID);
+                }
+                //@"https://photoshareappcmpe277.s3-us-west-1.amazonaws.com/pic-st-loup-herault-le-languedoc1430071277595.gif?AWSAccessKeyId=AKIAJRSSTBSKXU62UWUA&Expires=1461607278&Signature=1dMau3wbine58Y9wiai5J5n0DNU%3D"
+                
+                //            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
+                // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]]];
+                
+                //NSLog(@"image : %@",image);
+                
+                
             }
-            //@"https://photoshareappcmpe277.s3-us-west-1.amazonaws.com/pic-st-loup-herault-le-languedoc1430071277595.gif?AWSAccessKeyId=AKIAJRSSTBSKXU62UWUA&Expires=1461607278&Signature=1dMau3wbine58Y9wiai5J5n0DNU%3D"
-            
-//            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.appcoda.com/wp-content/uploads/2013/04/Camera-App-Main-Screen.jpg"]]];
-           // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgUrl]]];
-    
-     //NSLog(@"image : %@",image);
-            
-            
-        }
             
             _images = [NSArray arrayWithArray:mutableImages];
             
@@ -88,15 +106,15 @@ NSMutableArray *photoID;
             
         }
         
-//        NSLog(@"myPhotos1 count: %lu",[myPhotos count]);
-//        NSLog(@"myPhotos1 : %@",myPhotos);
-   
-            
+        //        NSLog(@"myPhotos1 count: %lu",[myPhotos count]);
+        //        NSLog(@"myPhotos1 : %@",myPhotos);
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
-    
+
 }
 
 
@@ -104,6 +122,9 @@ NSMutableArray *photoID;
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSLog(@"In numberOfItemsInSection");
 
+    
+    
+    
     return _images.count;
 }
 
