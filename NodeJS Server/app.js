@@ -5,12 +5,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
+var session = require('express-session');
 var app = express();
 
-//mongoose.connect('mongodb://cmpe277:cmpe277@ds047107.mongolab.com:47107/cmpe277');
-mongoose.connect('mongodb://cmpe277:cmpe277@ds041168.mongolab.com:41168/cmpe277');
+
+var util = require('util');
+// multi part handeling
+var multer  = require('multer');
+//var mongooseschema= require('models/userdata');
+
+var app = express();
+app.use(bodyParser.json());
+
+
+mongoose.connect('mongodb://cmpe277:cmpe277@ds047107.mongolab.com:47107/cmpe277');
+
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
@@ -23,7 +34,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/user', users);
+app.use('/',index);
+app.use('/photoshare/api/v1/users', users);
+
+//app.use(session({
+//    secret: 'keyboard cat',
+//    resave: true,
+//    saveUninitialized: true
+//}));
+
+//var passport = require('passport');
+//var expressSession = require('express-session');
+//app.use(expressSession({secret: 'mySecretKey'}));
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

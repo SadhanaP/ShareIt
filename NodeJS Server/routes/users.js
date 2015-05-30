@@ -3,9 +3,12 @@ var router = express.Router();
 var User = require('../models/user');
 var Photo = require('../models/photo');
 var chance = require('chance').Chance();
+var AWS = require('aws-sdk');
 var util = require('util');
 var fs = require('fs');
-
+// multi part handeling
+var multer  = require('multer')
+//var mongooseschema= require('models/userdata');
 var AWS = require('aws-sdk');
 AWS.config.update({
     accessKeyId: 'AKIAJRSSTBSKXU62UWUA',
@@ -28,29 +31,6 @@ router.use(multer({ dest: './uploads6/',
         done=true;
     }
 }));
-
-router.get('/:user_id', function (req, res) { // get user profile by id
-    var user_id = req.params.user_id;
-    if (user_id < 0) {
-        res.status(404).send('Invalid user id');
-    }
-    User.findOne({userId:user_id},function(err,foundUser){
-        if (err || foundUser===null) {
-            res.status(200);
-            res.setHeader('Content-Type', 'application/json');
-            res.json({
-                "message": "User Not Found"
-            });
-        }
-        else {
-            res.status(200);
-            res.setHeader('Content-Type', 'application/json');
-            res.json({
-                "user": foundUser
-            });
-        }
-    });
-});
 
 //app.use(session({
 //    secret: 'keyboard cat',
@@ -75,7 +55,6 @@ router.post('/',function(req,res){
             console.log(newUser);
             newUser.save(function (err, newUser) {
                 if (err){
-                    console.log(err);
                     res.status(404).send(err);
                 }
                 else {
@@ -100,6 +79,29 @@ router.post('/',function(req,res){
                 "message": "user already exist",
                 "error": err,
                 "userId" : req.body.userId
+            });
+        }
+    });
+});
+
+router.get('/:user_id', function (req, res) { // get user profile by id
+    var user_id = req.params.user_id;
+    if (user_id < 0) {
+        res.status(404).send('Invalid user id');
+    }
+    User.findOne({userId:user_id},function(err,foundUser){
+        if (err || foundUser===null) {
+            res.status(200);
+            res.setHeader('Content-Type', 'application/json');
+            res.json({
+                "message": "User Not Found"
+            });
+        }
+        else {
+            res.status(200);
+            res.setHeader('Content-Type', 'application/json');
+            res.json({
+                "user": foundUser
             });
         }
     });
@@ -134,20 +136,6 @@ router.post('/:user_id/album',function (req, res) { // create new album
                     });
                 }
             });
-        }
-    });
-});
-
-router.get('/:user_id/album/',function (req, res) {
-    User.find({userId:req.params.user_id},{album:1}, function (err, result) {
-        if (err) {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).send("Cannot find user or album with given id");
-        }
-        else {
-            res.status(200);
-            res.setHeader('Content-Type', 'application/json');
-            res.send(result);
         }
     });
 });
@@ -218,7 +206,7 @@ router.post('/:user_id/album/:album_id/photo',function (req, res) { // create ne
             console.log("file read success");
             //    console.log("image data-"+data);
             var params={
-                Bucket:"mini-linkedin",
+                Bucket:"photoshareappcmpe277",
                 Key: req.files.thumbnail.name,
                 ContentType: 'image/jpg',
                 CacheControl: 'max-age=31536000',
@@ -251,12 +239,10 @@ router.post('/:user_id/album/:album_id/photo',function (req, res) { // create ne
                     if (err){
                         res.setHeader('Content-Type', 'application/json');
                         res.status(200).send(err);
-                        console.log(err);
                     }
                     else {
                         res.setHeader('Content-Type', 'application/json');
                         res.status(201).send(newPhoto);
-                        console.log("Success: ");
                     }
                 })
 
